@@ -68,7 +68,7 @@ tradingAlgo/
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone (https://github.com/krossed5678/Trading-Algorithm.git)
    cd tradingAlgo
    ```
 
