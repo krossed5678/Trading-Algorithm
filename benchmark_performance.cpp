@@ -2,10 +2,18 @@
 #include "include/Strategy.hpp"
 #include "include/Backtester.hpp"
 #include "include/MovingAverage.hpp"
+#include "include/GPUStrategy.hpp"
 #include <iostream>
 #include <chrono>
 #include <vector>
 #include <iomanip>
+
+// Declare the GPU function at global scope
+extern "C" void gpu_calculate_all_indicators_and_signals(
+    const double* prices, int n,
+    double* sma, double* rsi, int* signals, double* stops, double* targets,
+    int sma_period, int rsi_period, double rsi_oversold, double risk_reward
+);
 
 // Performance benchmarking class
 class PerformanceBenchmark {
@@ -92,13 +100,6 @@ private:
         // Test GPU calculations
         auto start = std::chrono::high_resolution_clock::now();
         for (int iter = 0; iter < test_iterations; ++iter) {
-            // Use the optimized fused GPU kernel
-            extern "C" void gpu_calculate_all_indicators_and_signals(
-                const double* prices, int n,
-                double* sma, double* rsi, int* signals, double* stops, double* targets,
-                int sma_period, int rsi_period, double rsi_oversold, double risk_reward
-            );
-            
             gpu_calculate_all_indicators_and_signals(
                 prices.data(), static_cast<int>(data.size()),
                 sma_values.data(), rsi_values.data(),
@@ -122,7 +123,7 @@ private:
         std::cout << "--- Backtest Performance Test ---\n";
         
         // Test CPU strategy
-        Strategy* cpu_strategy = new GoldenFoundationStrategy(2.0);
+        Strategy* cpu_strategy = createGoldenFoundationStrategy(2.0);
         Backtester cpu_backtester(data, cpu_strategy, 10000.0);
         
         auto start = std::chrono::high_resolution_clock::now();
@@ -161,11 +162,10 @@ int main() {
     std::cout << "Loading data for performance benchmark...\n";
     
     // Load test data
-    DataLoader loader;
-    std::vector<OHLCV> data = loader.loadData("SPY_data.csv");
+    std::vector<OHLCV> data = DataLoader::loadCSV("data/SPY_1m.csv");
     
     if (data.empty()) {
-        std::cerr << "Failed to load data. Please ensure SPY_data.csv exists.\n";
+        std::cerr << "Failed to load data. Please ensure data/SPY_1m.csv exists.\n";
         return 1;
     }
     

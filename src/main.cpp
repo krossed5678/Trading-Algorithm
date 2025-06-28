@@ -1,11 +1,9 @@
 #include "../include/DataLoader.hpp"
 #include "../include/Backtester.hpp"
+#include "../include/Strategy.hpp"
 #include <iostream>
 #include <filesystem>
 #include <memory>
-
-// Factory function declaration
-Strategy* createGoldenFoundationStrategy(double risk = 1.0);
 
 int main() {
     std::string data_path = "data/SPY_1m.csv";

@@ -1,4 +1,5 @@
 #include "../include/GPUStrategy.hpp"
+#include "../include/MovingAverage.hpp"
 #include <iostream>
 #include <chrono>
 

@@ -16,6 +16,7 @@ public:
 private:
     int calculateDaysInDataset() const;
     void calculateAdditionalMetrics() const;
+    void addToYearlyPnL(const std::string& entry_date, double pnl);
     const std::vector<OHLCV>& data_;
     Strategy* strategy_;
     double initial_equity_;

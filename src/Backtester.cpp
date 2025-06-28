@@ -259,6 +259,3 @@ void Backtester::calculateAdditionalMetrics() const {
     std::cout << "Maximum Drawdown: " << std::fixed << std::setprecision(2) << (max_drawdown * 100.0) << "%\n";
     std::cout << "Sharpe Ratio: " << std::fixed << std::setprecision(2) << sharpe_ratio << "\n";
 }
-
-const std::map<int, double>& Backtester::getYearlyPnL() const { return yearly_pnl_; }
-double Backtester::getFinalEquity() const { return equity_; }

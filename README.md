@@ -72,14 +72,32 @@ tradingAlgo/
    cd tradingAlgo
    ```
 
-2. **Build the project**
+2. **Set Up Environment Variables**
+   **Windows:**
+   ```bash
+   setup_env.bat
+   ```
+
+   **Linux/Mac:**
+   ```bash
+   chmod +x setup_env.sh
+   ./setup_env.sh
+   ```
+
+   **Manual Setup:**
+   ```bash
+   cp env.example .env
+   # Edit .env and add your API keys
+   ```
+
+3. **Build the project**
    ```bash
    mkdir build && cd build
    cmake ..
    make -j$(nproc)
    ```
 
-3. **Fetch market data** (optional)
+4. **Fetch market data** (optional)
    ```bash
    # Set your Polygon.io API key
    export POLYGON_API_KEY="your_api_key_here"
@@ -88,7 +106,7 @@ tradingAlgo/
    python3 fetch_spy_data.py
    ```
 
-4. **Run the application**
+5. **Run the application**
    ```bash
    # GUI version (recommended)
    ./tradingAlgo_gui
@@ -447,99 +465,49 @@ public:
 
 This modular approach allows you to easily test and compare different strategies while maintaining high performance through GPU acceleration.
 
+## 🐍 Python Scripts
+
+The project includes Python scripts for data management and auto-updates:
+
+### Data Fetching
+```bash
+python fetch_spy_data.py
+```
+- Downloads SPY 1-minute data from Polygon.io
+- Requires `POLYGON_API_KEY` in `.env` file
+- Creates `data/SPY_1m.csv` automatically
+- Handles network errors and retries gracefully
+
+### Auto-Updater
+```bash
+python updater.py
+```
+- Checks GitHub releases for updates
+- Downloads and installs new versions safely
+- Creates backups of existing executables
+- Handles process management (waits for running apps to close)
+- Can restart the application after update
+
+### Installing Python Dependencies
+**Windows:**
+```bash
+install_python_deps.bat
+```
+
+**Linux/Mac:**
+```bash
+pip install -r requirements.txt
+```
+
+### Python Script Features
+- **Environment Integration**: Uses `.env` file for API keys
+- **Error Handling**: Robust error handling and user feedback
+- **Backup System**: Automatic backup creation before updates
+- **Process Management**: Safely handles running applications
+- **Cross-platform**: Works on Windows, Linux, and macOS
+
 ## 🔧 Configuration
 
 ### Build Options
 
-```cmake
-# Enable GPU acceleration (default: ON)
-option(USE_CUDA "Enable CUDA GPU acceleration" ON)
-
-# Build GUI (default: ON)
-option(BUILD_GUI "Build GUI application" ON)
-
-# Build tests (default: OFF)
-option(BUILD_TESTS "Build unit tests" OFF)
 ```
-
-### Runtime Configuration
-
-The application supports various configuration options:
-
-- **Data Sources**: CSV files, real-time feeds
-- **Strategy Parameters**: Customizable indicators and thresholds
-- **Risk Management**: Adjustable position sizing and stop levels
-- **Performance**: CPU/GPU mode selection
-
-## 📈 Performance
-
-### Benchmarks
-
-| Dataset Size | CPU Mode | GPU Mode | Speedup |
-|-------------|----------|----------|---------|
-| 1M bars     | 2.3s     | 0.4s     | 5.8x    |
-| 5M bars     | 11.2s    | 1.8s     | 6.2x    |
-| 10M bars    | 22.1s    | 3.5s     | 6.3x    |
-
-*Benchmarks performed on NVIDIA RTX 4060ti with Intel i5-13400F*
-
-### Memory Usage
-
-- **CPU Mode**: ~50MB for 1M data points
-- **GPU Mode**: ~200MB (includes GPU memory allocation)
-
-## 🧪 Testing
-
-Run the test suite:
-
-```bash
-cd build
-make test
-```
-
-Or run individual tests:
-
-```bash
-./tests/test_strategy
-./tests/test_backtester
-./tests/test_indicators
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Guidelines
-
-- Follow C++17 standards
-- Use meaningful variable and function names
-- Add unit tests for new features
-- Document complex algorithms
-- Maintain consistent code formatting
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Dear ImGui** - For the excellent GUI framework
-- **Polygon.io** - For high-quality market data
-- **CUDA Toolkit** - For GPU acceleration capabilities
-- **CMake** - For the robust build system
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/tradingAlgo/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/tradingAlgo/discussions)
-- **Documentation**: [Wiki](https://github.com/yourusername/tradingAlgo/wiki)
-
----
-
-**⚠️ Disclaimer**: This software is for educational and research purposes only. Past performance does not guarantee future results. Always conduct thorough testing before using any trading strategy with real money.
-
-**Made with ❤️ for the trading community**
