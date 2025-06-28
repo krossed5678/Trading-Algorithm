@@ -4,7 +4,7 @@
 #include <filesystem>
 
 // Factory function declaration
-Strategy* createGoldenFoundationStrategy();
+Strategy* createGoldenFoundationStrategy(double risk = 1.0);
 
 int main() {
     std::string data_path = "data/SPY_1m.csv";
@@ -21,7 +21,7 @@ int main() {
     std::cout << "First bar: " << data.front().timestamp << ", Last bar: " << data.back().timestamp << std::endl;
 
     std::cout << "Creating strategy...\n";
-    Strategy* strategy = createGoldenFoundationStrategy();
+    Strategy* strategy = createGoldenFoundationStrategy(1.0);
     std::cout << "Creating backtester...\n";
     Backtester backtester(data, strategy, 1000.0);
     std::cout << "Running backtest...\n";

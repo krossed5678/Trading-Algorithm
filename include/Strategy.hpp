@@ -17,9 +17,6 @@ struct TradeSignal {
     std::string reason; // For logging/analysis
 };
 
-// Forward declaration for the advanced strategy
-class GoldenFoundationStrategy;
-
 class Strategy {
 public:
     virtual ~Strategy() = default;
@@ -27,15 +24,8 @@ public:
     virtual TradeSignal generateSignal(const std::vector<OHLCV>& data, size_t current_index) = 0;
 };
 
-class GoldenFoundationStrategy : public Strategy {
-public:
-    GoldenFoundationStrategy(double risk = 1.0) : risk_(risk) {}
-    TradeSignal generateSignal(const std::vector<OHLCV>& data, size_t current_index) override;
-private:
-    double risk_;
-};
+// Forward declaration for the advanced strategy
+class GoldenFoundationStrategy;
 
 // Factory function for GUI
-inline Strategy* createGoldenFoundationStrategy(double risk) {
-    return new GoldenFoundationStrategy(risk);
-}
+Strategy* createGoldenFoundationStrategy(double risk = 1.0);
