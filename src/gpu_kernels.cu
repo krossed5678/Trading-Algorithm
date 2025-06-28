@@ -9,8 +9,16 @@
 #include <iostream>
 #include <cuda_profiler_api.h>
 
-// Error checking macro
-#define CUDA_CHECK(call) \
+// Error checking macros
+#define CUDA_CHECK_RETURN_NULLPTR(call) \
+    do { \
+        cudaError_t err = call; \
+        if (err != cudaSuccess) { \
+            std::cerr << "CUDA error: " << cudaGetErrorString(err) << " at " << __FILE__ << ":" << __LINE__ << std::endl; \
+            return nullptr; \
+        } \
+    } while(0)
+#define CUDA_CHECK_RETURN_VOID(call) \
     do { \
         cudaError_t err = call; \
         if (err != cudaSuccess) { \
@@ -35,7 +43,6 @@ __global__ void optimized_sma_kernel(const double* prices, double* sma, int n, i
     // Coalesced memory access pattern
     int window_start = max(0, idx - period + 1);
     int window_end = min(n - 1, idx);
-    int window_size = window_end - window_start + 1;
     
     // Load data into shared memory with coalesced access
     double local_sum = 0.0;
@@ -71,7 +78,6 @@ __global__ void optimized_sma_kernel(const double* prices, double* sma, int n, i
 __global__ void optimized_rsi_kernel(const double* prices, double* rsi, int n, int period) {
     extern __shared__ double s_data[];
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
-    int tid = threadIdx.x;
     
     if (idx >= n) return;
     
@@ -83,9 +89,9 @@ __global__ void optimized_rsi_kernel(const double* prices, double* rsi, int n, i
     // Load price data into shared memory
     int start_idx = idx - period;
     for (int i = 0; i <= period; i += blockDim.x) {
-        int load_idx = start_idx + i + tid;
+        int load_idx = start_idx + i + threadIdx.x;
         if (load_idx <= idx && load_idx < n) {
-            s_data[tid * (period + 1) + i] = prices[load_idx];
+            s_data[threadIdx.x * (period + 1) + i] = prices[load_idx];
         }
     }
     __syncthreads();
@@ -93,7 +99,7 @@ __global__ void optimized_rsi_kernel(const double* prices, double* rsi, int n, i
     // Calculate gains and losses
     double gain_sum = 0.0, loss_sum = 0.0;
     for (int i = 1; i <= period; i++) {
-        double change = s_data[tid * (period + 1) + i] - s_data[tid * (period + 1) + i - 1];
+        double change = s_data[threadIdx.x * (period + 1) + i] - s_data[threadIdx.x * (period + 1) + i - 1];
         if (change > 0) {
             gain_sum += change;
         } else if (change < 0) {
@@ -258,9 +264,11 @@ public:
         }
         
         // Allocate new block
-        void* ptr;
-        CUDA_CHECK(cudaMalloc(&ptr, size));
-        blocks_.push_back({ptr, size, true});
+        void* ptr = nullptr;
+        CUDA_CHECK_RETURN_NULLPTR(cudaMalloc(&ptr, size));
+        if (ptr != nullptr) {
+            blocks_.push_back({ptr, size, true});
+        }
         return ptr;
     }
     
@@ -304,7 +312,7 @@ void gpu_calculate_indicators(
     d_targets = (double*)g_memory_pool.allocate(n * sizeof(double));
     
     // Asynchronous memory copy
-    CUDA_CHECK(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
     
     // Launch fused kernel
     int block_size = 256;
@@ -324,8 +332,8 @@ void gpu_calculate_indicators(
     }
     
     // Asynchronous copy back
-    CUDA_CHECK(cudaMemcpyAsync(sma, d_sma, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(rsi, d_rsi, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(sma, d_sma, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(rsi, d_rsi, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
     
     // Synchronize
     cudaDeviceSynchronize();
@@ -357,9 +365,9 @@ void gpu_generate_signals(
     d_targets = (double*)g_memory_pool.allocate(n * sizeof(double));
     
     // Asynchronous memory copies
-    CUDA_CHECK(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
-    CUDA_CHECK(cudaMemcpyAsync(d_sma, sma, n * sizeof(double), cudaMemcpyHostToDevice, 0));
-    CUDA_CHECK(cudaMemcpyAsync(d_rsi, rsi, n * sizeof(double), cudaMemcpyHostToDevice, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(d_sma, sma, n * sizeof(double), cudaMemcpyHostToDevice, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(d_rsi, rsi, n * sizeof(double), cudaMemcpyHostToDevice, 0));
     
     // Launch optimized signal kernel
     int block_size = 256;
@@ -377,9 +385,9 @@ void gpu_generate_signals(
     }
     
     // Asynchronous copy back
-    CUDA_CHECK(cudaMemcpyAsync(signals, d_signals, n * sizeof(int), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(stops, d_stops, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(targets, d_targets, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(signals, d_signals, n * sizeof(int), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(stops, d_stops, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(targets, d_targets, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
     
     // Synchronize
     cudaDeviceSynchronize();
@@ -412,7 +420,7 @@ void gpu_calculate_all_indicators_and_signals(
     d_targets = (double*)g_memory_pool.allocate(n * sizeof(double));
     
     // Single memory copy
-    CUDA_CHECK(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice, 0));
     
     // Launch single fused kernel
     int block_size = 256;
@@ -431,11 +439,11 @@ void gpu_calculate_all_indicators_and_signals(
     }
     
     // Single synchronization and copy back
-    CUDA_CHECK(cudaMemcpyAsync(sma, d_sma, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(rsi, d_rsi, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(signals, d_signals, n * sizeof(int), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(stops, d_stops, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
-    CUDA_CHECK(cudaMemcpyAsync(targets, d_targets, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(sma, d_sma, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(rsi, d_rsi, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(signals, d_signals, n * sizeof(int), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(stops, d_stops, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
+    CUDA_CHECK_RETURN_VOID(cudaMemcpyAsync(targets, d_targets, n * sizeof(double), cudaMemcpyDeviceToHost, 0));
     
     cudaDeviceSynchronize();
     
