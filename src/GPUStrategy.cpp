@@ -1,5 +1,13 @@
 #include "../include/GPUStrategy.hpp"
 #include <iostream>
+#include <chrono>
+
+// Declare the new optimized CUDA function
+extern "C" void gpu_calculate_all_indicators_and_signals(
+    const double* prices, int n,
+    double* sma, double* rsi, int* signals, double* stops, double* targets,
+    int sma_period, int rsi_period, double rsi_oversold, double risk_reward
+);
 
 GPUGoldenFoundationStrategy::GPUGoldenFoundationStrategy(double risk_reward)
     : risk_reward_(risk_reward), precomputed_(false) {
@@ -11,9 +19,11 @@ GPUGoldenFoundationStrategy::~GPUGoldenFoundationStrategy() {
 void GPUGoldenFoundationStrategy::precomputeSignals(const std::vector<OHLCV>& data) {
     if (data.empty()) return;
     
+    auto start_time = std::chrono::high_resolution_clock::now();
+    
     int n = static_cast<int>(data.size());
     
-    // Extract close prices
+    // Extract close prices for better memory locality
     std::vector<double> prices(n);
     for (int i = 0; i < n; i++) {
         prices[i] = data[i].close;
@@ -33,33 +43,33 @@ void GPUGoldenFoundationStrategy::precomputeSignals(const std::vector<OHLCV>& da
     
     std::cout << "Computing indicators on GPU for " << n << " bars..." << std::endl;
     
-    // Calculate indicators on GPU
-    gpu_calculate_indicators(
+    // Use the new optimized fused kernel that does everything in one GPU call
+    gpu_calculate_all_indicators_and_signals(
         prices.data(), n,
         sma_values_.data(), rsi_values_.data(),
-        sma_period, rsi_period
+        signals_.data(), stops_.data(), targets_.data(),
+        sma_period, rsi_period, rsi_oversold, risk_reward_
     );
     
-    // Generate signals on GPU
-    gpu_generate_signals(
-        prices.data(), sma_values_.data(), rsi_values_.data(),
-        n, rsi_oversold, risk_reward_,
-        signals_.data(), stops_.data(), targets_.data()
-    );
-    
-    // Check if GPU generated any signals
+    // Count signals generated
     int signal_count = 0;
     for (int i = 0; i < n; i++) {
         if (signals_[i] == 1) signal_count++;
     }
     
-    std::cout << "GPU generated " << signal_count << " signals" << std::endl;
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
     
-    // If no signals from GPU, fall back to CPU signal generation
+    std::cout << "GPU generated " << signal_count << " signals in " << duration.count() << "ms" << std::endl;
+    
+    // If no signals from GPU, fall back to optimized CPU signal generation
     if (signal_count == 0) {
-        std::cout << "No GPU signals detected, falling back to CPU signal generation..." << std::endl;
+        std::cout << "No GPU signals detected, falling back to optimized CPU signal generation..." << std::endl;
         
-        // Use CPU logic for signal generation
+        // Use optimized CPU batch calculations
+        Indicators::calculateBatchIndicators(data, sma_values_, rsi_values_, sma_period, rsi_period);
+        
+        // Generate signals using optimized CPU logic
         for (int i = 0; i < n; i++) {
             if (i < std::max(sma_period, rsi_period)) {
                 signals_[i] = 0;
@@ -70,17 +80,19 @@ void GPUGoldenFoundationStrategy::precomputeSignals(const std::vector<OHLCV>& da
             bool uptrend = prices[i] > sma_values_[i];
             bool oversold = rsi_values_[i] < rsi_oversold;
             
-            // Simple FVG detection (gap up/down)
+            // Enhanced FVG detection
             bool fvg = false;
             if (i >= 1) {
-                fvg = (prices[i] > prices[i-1] * 1.01) || (prices[i] < prices[i-1] * 0.99);
+                double gap_threshold = 0.01; // 1% threshold
+                fvg = (prices[i] > prices[i-1] * (1.0 + gap_threshold)) || 
+                      (prices[i] < prices[i-1] * (1.0 - gap_threshold));
             }
             
             if (uptrend && oversold && fvg) {
                 signals_[i] = 1; // BUY signal
                 double entry = prices[i];
                 double stop_loss_pct = 0.005 / risk_reward_;
-                stops_[i] = entry - (entry * stop_loss_pct);
+                stops_[i] = entry * (1.0 - stop_loss_pct);
                 targets_[i] = entry + (entry - stops_[i]) * risk_reward_;
             } else {
                 signals_[i] = 0; // NO signal

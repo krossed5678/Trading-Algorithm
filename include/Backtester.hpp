@@ -14,6 +14,8 @@ public:
     const std::map<int, double>& getYearlyPnL() const { return yearly_pnl_; }
     double getFinalEquity() const { return equity_; }
 private:
+    int calculateDaysInDataset() const;
+    void calculateAdditionalMetrics() const;
     const std::vector<OHLCV>& data_;
     Strategy* strategy_;
     double initial_equity_;
