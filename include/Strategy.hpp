@@ -26,3 +26,16 @@ public:
     // Generate a signal for the current bar
     virtual TradeSignal generateSignal(const std::vector<OHLCV>& data, size_t current_index) = 0;
 };
+
+class GoldenFoundationStrategy : public Strategy {
+public:
+    GoldenFoundationStrategy(double risk = 1.0) : risk_(risk) {}
+    TradeSignal generateSignal(const std::vector<OHLCV>& data, size_t current_index) override;
+private:
+    double risk_;
+};
+
+// Factory function for GUI
+inline Strategy* createGoldenFoundationStrategy(double risk) {
+    return new GoldenFoundationStrategy(risk);
+}

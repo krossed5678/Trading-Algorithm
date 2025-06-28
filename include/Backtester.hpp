@@ -11,6 +11,8 @@ public:
     void run();
     void printYearlyPnL() const;
     void printTotalGain() const;
+    const std::map<int, double>& getYearlyPnL() const { return yearly_pnl_; }
+    double getFinalEquity() const { return equity_; }
 private:
     const std::vector<OHLCV>& data_;
     Strategy* strategy_;

@@ -11,7 +11,7 @@ public:
         const size_t rsi_period = 14;
         const double rsi_oversold = 30.0;
         const double risk_reward = 3.0;
-        const double risk_per_trade = 10.0; // $10 per trade risk
+        // risk_ is set by GUI (default 1.0)
 
         if (current_index < std::max(sma_period, rsi_period))
             return {SignalType::NONE, current_index, 0.0, 0.0, "Not enough data"};
@@ -37,7 +37,7 @@ public:
         // 4. Entry logic: Only buy in uptrend, oversold, and FVG
         if (uptrend && oversold && fvg) {
             double entry = data[current_index].close;
-            double stop = entry - (entry * 0.005); // 0.5% stop
+            double stop = entry - (entry * 0.005 * risk_); // risk_ scales stop loss
             double target = entry + (entry - stop) * risk_reward;
             return {SignalType::BUY, current_index, stop, target, "Uptrend, RSI<30, FVG"};
         }
