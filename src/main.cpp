@@ -2,6 +2,7 @@
 #include "../include/Backtester.hpp"
 #include <iostream>
 #include <filesystem>
+#include <memory>
 
 // Factory function declaration
 Strategy* createGoldenFoundationStrategy(double risk = 1.0);
@@ -21,15 +22,14 @@ int main() {
     std::cout << "First bar: " << data.front().timestamp << ", Last bar: " << data.back().timestamp << std::endl;
 
     std::cout << "Creating strategy...\n";
-    Strategy* strategy = createGoldenFoundationStrategy(1.0);
+    std::unique_ptr<Strategy> strategy(createGoldenFoundationStrategy(1.0));
     std::cout << "Creating backtester...\n";
-    Backtester backtester(data, strategy, 1000.0);
+    Backtester backtester(data, strategy.get(), 1000.0);
     std::cout << "Running backtest...\n";
     backtester.run();
     std::cout << "Backtest complete.\n";
     backtester.printYearlyPnL();
     backtester.printTotalGain();
 
-    delete strategy;
     return 0;
 }

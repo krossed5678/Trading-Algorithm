@@ -14,38 +14,69 @@
         } \
     } while(0)
 
+// Optimized SMA kernel using shared memory for small/medium periods
 __global__ void sma_kernel(const double* prices, double* sma, int n, int period) {
+    extern __shared__ double s_prices[];
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int tid = threadIdx.x;
     if (idx >= n) return;
-    
+
+    // Load data into shared memory (window for this block)
+    int window_start = idx - period + 1;
+    int window_end = idx;
+    for (int i = 0; i < period; ++i) {
+        int data_idx = window_start + i;
+        if (data_idx >= 0 && data_idx < n) {
+            s_prices[tid * period + i] = prices[data_idx];
+        } else {
+            s_prices[tid * period + i] = 0.0;
+        }
+    }
+    __syncthreads();
+
     if (idx < period - 1) {
         sma[idx] = 0.0;
         return;
     }
-    
+
     double sum = 0.0;
-    for (int i = idx - period + 1; i <= idx; i++) {
-        sum += prices[i];
+    for (int i = 0; i < period; ++i) {
+        sum += s_prices[tid * period + i];
     }
     sma[idx] = sum / period;
 }
 
+// Optimized RSI kernel using shared memory for small/medium periods
 __global__ void rsi_kernel(const double* prices, double* rsi, int n, int period) {
+    extern __shared__ double s_prices[];
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int tid = threadIdx.x;
     if (idx >= n) return;
-    
+
+    // Load data into shared memory (window for this block)
+    int window_start = idx - period + 1;
+    for (int i = 0; i <= period; ++i) {
+        int data_idx = window_start + i - 1;
+        if (data_idx >= 0 && data_idx < n) {
+            s_prices[tid * (period + 1) + i] = prices[data_idx];
+        } else {
+            s_prices[tid * (period + 1) + i] = 0.0;
+        }
+    }
+    __syncthreads();
+
     if (idx < period) {
         rsi[idx] = 50.0;
         return;
     }
-    
+
     double gain = 0.0, loss = 0.0;
-    for (int i = idx - period + 1; i <= idx; i++) {
-        double change = prices[i] - prices[i - 1];
+    for (int i = 1; i <= period; ++i) {
+        double change = s_prices[tid * (period + 1) + i] - s_prices[tid * (period + 1) + i - 1];
         if (change > 0) gain += change;
         else loss -= change;
     }
-    
+
     if (gain + loss == 0) {
         rsi[idx] = 50.0;
     } else {
@@ -103,12 +134,27 @@ void gpu_calculate_indicators(
     // Copy data to GPU
     CUDA_CHECK(cudaMemcpy(d_prices, prices, n * sizeof(double), cudaMemcpyHostToDevice));
     
-    // Launch kernels
+    // Launch kernels with shared memory
     int block_size = 256;
     int grid_size = (n + block_size - 1) / block_size;
+    size_t sma_shmem = block_size * sma_period * sizeof(double);
+    size_t rsi_shmem = block_size * (rsi_period + 1) * sizeof(double);
     
-    sma_kernel<<<grid_size, block_size>>>(d_prices, d_sma, n, sma_period);
-    rsi_kernel<<<grid_size, block_size>>>(d_prices, d_rsi, n, rsi_period);
+    sma_kernel<<<grid_size, block_size, sma_shmem>>>(d_prices, d_sma, n, sma_period);
+    cudaDeviceSynchronize();
+    cudaError_t err = cudaGetLastError();
+    if (err != cudaSuccess) {
+        std::cerr << "SMA kernel launch failed: " << cudaGetErrorString(err) << std::endl;
+        return;
+    }
+    
+    rsi_kernel<<<grid_size, block_size, rsi_shmem>>>(d_prices, d_rsi, n, rsi_period);
+    cudaDeviceSynchronize();
+    err = cudaGetLastError();
+    if (err != cudaSuccess) {
+        std::cerr << "RSI kernel launch failed: " << cudaGetErrorString(err) << std::endl;
+        return;
+    }
     
     // Copy results back
     CUDA_CHECK(cudaMemcpy(sma, d_sma, n * sizeof(double), cudaMemcpyDeviceToHost));
@@ -150,6 +196,13 @@ void gpu_generate_signals(
         d_prices, d_sma, d_rsi, d_signals, d_stops, d_targets,
         n, rsi_oversold, risk_reward
     );
+    
+    cudaDeviceSynchronize();
+    cudaError_t err = cudaGetLastError();
+    if (err != cudaSuccess) {
+        std::cerr << "Signal kernel launch failed: " << cudaGetErrorString(err) << std::endl;
+        return;
+    }
     
     // Copy results back
     CUDA_CHECK(cudaMemcpy(signals, d_signals, n * sizeof(int), cudaMemcpyDeviceToHost));

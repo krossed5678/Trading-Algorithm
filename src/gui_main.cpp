@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <memory>
 
 // Factory functions for strategies
 Strategy* createGoldenFoundationStrategy(double risk_reward);
@@ -25,24 +26,21 @@ void run_backtest(float start_amount, float risk_reward, bool use_gpu, std::stri
         result_text = "No data loaded!";
         return;
     }
-    
-    Strategy* strategy;
+    std::unique_ptr<Strategy> strategy;
 #ifdef USE_CUDA
     if (use_gpu) {
-        strategy = createGPUGoldenFoundationStrategy(risk_reward);
+        strategy.reset(createGPUGoldenFoundationStrategy(risk_reward));
     } else {
-        strategy = createGoldenFoundationStrategy(risk_reward);
+        strategy.reset(createGoldenFoundationStrategy(risk_reward));
     }
 #else
-    strategy = createGoldenFoundationStrategy(risk_reward);
+    strategy.reset(createGoldenFoundationStrategy(risk_reward));
     if (use_gpu) {
         result_text = "GPU acceleration not available (CUDA not installed)";
-        delete strategy;
         return;
     }
 #endif
-    
-    Backtester backtester(data, strategy, start_amount);
+    Backtester backtester(data, strategy.get(), start_amount);
     backtester.run();
     std::ostringstream oss;
     oss << "Yearly P&L:\n";
@@ -55,7 +53,6 @@ void run_backtest(float start_amount, float risk_reward, bool use_gpu, std::stri
         << "\nStrategy: " << (use_gpu ? "GPU" : "CPU")
         << "\nStart Amount: $" << start_amount;
     result_text = oss.str();
-    delete strategy;
 }
 
 int main() {
