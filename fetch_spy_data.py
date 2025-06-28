@@ -1,89 +1,82 @@
-import requests
-import pandas as pd
 import os
+import requests
+import csv
 from datetime import datetime, timedelta
+import time
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Get API key from environment
 API_KEY = os.getenv("POLYGON_API_KEY")
 if not API_KEY:
-    print("ERROR: POLYGON_API_KEY not found in .env file!")
-    print("Please run setup_env.bat (Windows) or ./setup_env.sh (Linux/Mac) and add your API key to .env")
-    exit(1)
+    raise RuntimeError("POLYGON_API_KEY not set in environment. Please set it in your .env file or environment variables.")
 
 symbol = "SPY"
-end_date = datetime.today()
-all_data = []
-
-# Create data directory if it doesn't exist
-os.makedirs("data", exist_ok=True)
-
-# Go back day by day until no data is returned
-max_days_without_data = 5  # Stop after this many consecutive days with no data
-days_without_data = 0
-
-print(f"Fetching {symbol} data using Polygon.io API...")
-print(f"Starting from: {end_date.strftime('%Y-%m-%d')}")
-
-while True:
-    date_str = end_date.strftime("%Y-%m-%d")
-    url = (
-        f"https://api.polygon.io/v2/aggs/ticker/{symbol}/range/1/minute/"
-        f"{date_str}/{date_str}?adjusted=true&sort=asc&limit=50000&apiKey={API_KEY}"
-    )
-    print(f"Fetching {date_str}...")
-    
-    try:
-        resp = requests.get(url, timeout=30)
-        if resp.status_code != 200:
-            print(f"Failed to fetch {date_str}: {resp.text}")
-            days_without_data += 1
-        else:
-            results = resp.json().get("results", [])
-            if not results:
-                print(f"No data for {date_str}")
-                days_without_data += 1
-            else:
-                print(f"Got {len(results)} bars for {date_str}")
-                for bar in results:
-                    all_data.append({
-                        "timestamp": datetime.utcfromtimestamp(bar["t"] / 1000).strftime("%Y-%m-%d %H:%M:%S"),
-                        "open": bar["o"],
-                        "high": bar["h"],
-                        "low": bar["l"],
-                        "close": bar["c"],
-                        "volume": bar["v"]
-                    })
-                days_without_data = 0  # Reset if we got data
-    except requests.exceptions.RequestException as e:
-        print(f"Network error fetching {date_str}: {e}")
-        days_without_data += 1
-    except Exception as e:
-        print(f"Error processing {date_str}: {e}")
-        days_without_data += 1
-    
-    if days_without_data >= max_days_without_data:
-        print("No data for several consecutive days. Stopping.")
-        break
-    end_date -= timedelta(days=1)
-
-if not all_data:
-    print("No data fetched!")
-    exit(1)
-
-df = pd.DataFrame(all_data)
-df.sort_values("timestamp", inplace=True)
-print(f"\nTotal rows fetched: {len(df)}")
-print(f"Date range: {df['timestamp'].min()} to {df['timestamp'].max()}")
-print("\nFirst 5 rows:")
-print(df.head())
-print("\nLast 5 rows:")
-print(df.tail())
-
+interval = "minute"
 output_file = "data/SPY_1m.csv"
-df.to_csv(output_file, index=False)
-print(f"\nSaved {len(df)} rows to {output_file}")
-print("Data fetch complete!")
+
+# Polygon.io v2 aggregates endpoint
+BASE_URL = "https://api.polygon.io/v2/aggs/ticker/{}/range/1/minute/{}/{}?adjusted=true&sort=desc&limit=50000&apiKey={}"
+
+# Start from today and go backwards
+end_date = datetime.utcnow()
+chunk_days = 7  # Use small chunks for short API windows
+
+def fetch_chunk(symbol, from_date, to_date, api_key):
+    url = BASE_URL.format(symbol, from_date.strftime("%Y-%m-%d"), to_date.strftime("%Y-%m-%d"), api_key)
+    print(f"[INFO] Fetching {symbol} 1m data: {from_date.date()} to {to_date.date()} ...")
+    r = requests.get(url)
+    if r.status_code != 200:
+        print(f"[ERROR] Failed to fetch data: {r.status_code} {r.text}")
+        return []
+    data = r.json()
+    if "results" not in data:
+        print(f"[WARNING] No results for {from_date.date()} to {to_date.date()}")
+        return []
+    return data["results"]
+
+def write_csv_header(filename):
+    with open(filename, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["timestamp", "open", "high", "low", "close", "volume"])
+
+def append_csv_rows(filename, rows):
+    with open(filename, "a", newline="") as f:
+        writer = csv.writer(f)
+        for row in rows:
+            writer.writerow(row)
+
+def main():
+    os.makedirs("data", exist_ok=True)
+    all_rows = []
+    current_end = end_date
+    total_rows = 0
+    while True:
+        current_start = current_end - timedelta(days=chunk_days)
+        chunk = fetch_chunk(symbol, current_start, current_end, API_KEY)
+        if not chunk:
+            print("[INFO] No more data returned. Stopping.")
+            break
+        rows = []
+        for bar in chunk:
+            ts = datetime.utcfromtimestamp(bar["t"] / 1000).strftime("%Y-%m-%d %H:%M:%S")
+            rows.append([
+                ts,
+                bar["o"],
+                bar["h"],
+                bar["l"],
+                bar["c"],
+                bar["v"]
+            ])
+        all_rows = rows + all_rows  # Prepend so oldest is first
+        total_rows += len(rows)
+        print(f"[INFO] Fetched {len(rows)} rows ({total_rows} total)")
+        current_end = current_start - timedelta(days=1)
+        time.sleep(1)  # Avoid rate limits
+    print(f"[DONE] Writing {len(all_rows)} rows to {output_file}")
+    write_csv_header(output_file)
+    append_csv_rows(output_file, all_rows)
+    print(f"[DONE] All data written to {output_file}")
+
+if __name__ == "__main__":
+    main()

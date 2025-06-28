@@ -1,18 +1,30 @@
 #include "../include/DataLoader.hpp"
 #include "../include/Backtester.hpp"
 #include "../include/Strategy.hpp"
+#include "../include/FileUtils.hpp"
 #include <iostream>
 #include <filesystem>
 #include <memory>
 
 int main() {
-    std::string data_path = "data/SPY_1m.csv";
+    std::string data_path = FileUtils::findDataFile("SPY_1m.csv");
     if (!std::filesystem::exists(data_path)) {
-        std::cerr << "ERROR: File not found: " << data_path << std::endl;
+        std::cerr << "ERROR: SPY_1m.csv not found!" << std::endl;
+        std::cerr << "Tried looking in:" << std::endl;
+        std::cerr << "  - Current directory" << std::endl;
+        std::cerr << "  - ../ (one level up)" << std::endl;
+        std::cerr << "  - ../../ (two levels up)" << std::endl;
+        std::cerr << "  - data/ subdirectory" << std::endl;
+        std::cerr << "  - ../data/ subdirectory" << std::endl;
+        std::cerr << "  - ../../data/ subdirectory" << std::endl;
+        std::cerr << std::endl;
+        std::cerr << "Please ensure SPY_1m.csv exists in one of these locations." << std::endl;
+        std::cerr << "You can run 'python fetch_spy_data.py' to download the data." << std::endl;
         return 1;
     }
+    
     auto data = DataLoader::loadCSV(data_path);
-    std::cout << "Loaded " << data.size() << " bars from SPY_1m.csv" << std::endl;
+    std::cout << "Loaded " << data.size() << " bars from " << data_path << std::endl;
     if (data.empty()) {
         std::cerr << "ERROR: No data loaded from " << data_path << std::endl;
         return 1;

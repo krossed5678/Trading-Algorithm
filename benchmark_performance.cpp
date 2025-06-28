@@ -3,6 +3,7 @@
 #include "include/Backtester.hpp"
 #include "include/MovingAverage.hpp"
 #include "include/GPUStrategy.hpp"
+#include "include/FileUtils.hpp"
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -162,10 +163,12 @@ int main() {
     std::cout << "Loading data for performance benchmark...\n";
     
     // Load test data
-    std::vector<OHLCV> data = DataLoader::loadCSV("data/SPY_1m.csv");
+    std::string data_path = FileUtils::findDataFile("SPY_1m.csv");
+    std::vector<OHLCV> data = DataLoader::loadCSV(data_path);
     
     if (data.empty()) {
-        std::cerr << "Failed to load data. Please ensure data/SPY_1m.csv exists.\n";
+        std::cerr << "Failed to load data. Please ensure SPY_1m.csv exists.\n";
+        std::cerr << "Run 'python fetch_spy_data.py' to download the data.\n";
         return 1;
     }
     

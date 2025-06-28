@@ -1,6 +1,7 @@
 #include "../include/DataLoader.hpp"
 #include "../include/Backtester.hpp"
 #include "../include/Strategy.hpp"
+#include "../include/FileUtils.hpp"
 #ifdef USE_CUDA
 #include "../include/GPUStrategy.hpp"
 #endif
@@ -12,6 +13,7 @@
 #include <sstream>
 #include <string>
 #include <memory>
+#include <chrono>
 
 // Factory functions for strategies
 Strategy* createGoldenFoundationStrategy(double risk_reward);
@@ -19,46 +21,95 @@ Strategy* createGoldenFoundationStrategy(double risk_reward);
 Strategy* createGPUGoldenFoundationStrategy(double risk_reward);
 #endif
 
-// Helper to run the backtest and collect results
-void run_backtest(float start_amount, float risk_reward, bool use_gpu, std::string& result_text) {
-    auto data = DataLoader::loadCSV("data/SPY_1m.csv");
+struct BacktestParams {
+    float start_amount;
+    float risk_reward;
+    bool use_gpu;
+    std::string data_path;
+    bool operator!=(const BacktestParams& other) const {
+        return start_amount != other.start_amount ||
+               risk_reward != other.risk_reward ||
+               use_gpu != other.use_gpu ||
+               data_path != other.data_path;
+    }
+};
+
+std::string getRiskLabel(float risk_reward) {
+    if (risk_reward <= 1.5f) return "SAFE";
+    if (risk_reward <= 2.5f) return "MODERATE";
+    if (risk_reward <= 3.5f) return "RISKY";
+    return "EXTREMELY RISKY";
+}
+
+ImVec4 getRiskColor(float risk_reward) {
+    if (risk_reward <= 1.5f) return ImVec4(0.0f, 1.0f, 0.0f, 1.0f);      // Green
+    if (risk_reward <= 2.5f) return ImVec4(1.0f, 1.0f, 0.0f, 1.0f);      // Yellow
+    if (risk_reward <= 3.5f) return ImVec4(1.0f, 0.5f, 0.0f, 1.0f);      // Orange
+    return ImVec4(1.0f, 0.0f, 0.0f, 1.0f);                              // Red
+}
+
+void run_backtest(const BacktestParams& params, std::string& result_text, bool& running_flag) {
+    running_flag = true;
+    std::string data_path = params.data_path;
+    auto data = DataLoader::loadCSV(data_path);
     if (data.empty()) {
-        result_text = "No data loaded!";
+        result_text = "[ERROR] No data loaded! Please ensure SPY_1m.csv exists.\nRun 'python fetch_spy_data.py' to download data.";
+        std::cerr << "[ERROR] No data loaded from: " << data_path << std::endl;
+        running_flag = false;
         return;
     }
     std::unique_ptr<Strategy> strategy;
 #ifdef USE_CUDA
-    if (use_gpu) {
-        strategy.reset(createGPUGoldenFoundationStrategy(risk_reward));
+    if (params.use_gpu) {
+        strategy.reset(createGPUGoldenFoundationStrategy(params.risk_reward));
     } else {
-        strategy.reset(createGoldenFoundationStrategy(risk_reward));
+        strategy.reset(createGoldenFoundationStrategy(params.risk_reward));
     }
 #else
-    strategy.reset(createGoldenFoundationStrategy(risk_reward));
-    if (use_gpu) {
-        result_text = "GPU acceleration not available (CUDA not installed)";
+    strategy.reset(createGoldenFoundationStrategy(params.risk_reward));
+    if (params.use_gpu) {
+        result_text = "[ERROR] GPU acceleration not available (CUDA not installed)";
+        std::cerr << "[ERROR] GPU acceleration not available (CUDA not installed)" << std::endl;
+        running_flag = false;
         return;
     }
 #endif
-    Backtester backtester(data, strategy.get(), start_amount);
+    Backtester backtester(data, strategy.get(), params.start_amount);
     backtester.run();
+    double gain = backtester.getFinalEquity() - params.start_amount;
+    double pct_gain = (gain / params.start_amount) * 100.0;
     std::ostringstream oss;
     oss << "Yearly P&L:\n";
     for (const auto& kv : backtester.getYearlyPnL()) {
-        oss << kv.first << ": " << kv.second << "\n";
+        oss << kv.first << ": $" << std::fixed << std::setprecision(2) << kv.second << "\n";
     }
-    oss << "\nTotal gain: " << (backtester.getFinalEquity() - start_amount)
-        << "\nFinal equity: " << backtester.getFinalEquity()
-        << "\nRisk/Reward: " << risk_reward << ":1"
-        << "\nStrategy: " << (use_gpu ? "GPU" : "CPU")
-        << "\nStart Amount: $" << start_amount;
+    oss << "\nTotal gain: $" << std::fixed << std::setprecision(2) << gain
+        << " (" << std::fixed << std::setprecision(2) << pct_gain << "%)"
+        << "\nFinal equity: $" << std::fixed << std::setprecision(2) << backtester.getFinalEquity()
+        << "\nRisk/Reward: " << params.risk_reward << ":1"
+        << "\nStrategy: " << (params.use_gpu ? "GPU" : "CPU")
+        << "\nStart Amount: $" << std::fixed << std::setprecision(2) << params.start_amount;
+    if (backtester.getYearlyPnL().empty() || gain == 0.0) {
+        oss << "\n\n[WARNING] No trades were generated. Try adjusting your risk/reward or ensure your data covers enough time for signals.";
+    }
+    running_flag = false;
     result_text = oss.str();
 }
 
 int main() {
     // Setup window
-    if (!glfwInit()) return 1;
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Trading Backtester", NULL, NULL);
+    if (!glfwInit()) {
+        std::cerr << "Failed to initialize GLFW" << std::endl;
+        return 1;
+    }
+    
+    GLFWwindow* window = glfwCreateWindow(1000, 800, "Trading Algorithm Backtester", NULL, NULL);
+    if (!window) {
+        std::cerr << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return 1;
+    }
+    
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
 
@@ -72,17 +123,20 @@ int main() {
 
     // App state
     float start_amount = 1000.0f;
-    float risk_reward = 3.0f;
-    std::string result_text = "";
-    
-    // Mode selection state
-    bool mode_selected = false;
+    float risk_reward = 2.0f;
     bool use_gpu = false;
-#ifdef USE_CUDA
-    bool cuda_available = true;
-#else
-    bool cuda_available = false;
-#endif
+    bool live_update = false;
+    std::string result_text = "Click 'Run Backtest' to start...";
+    bool running = false;
+    std::string data_path = FileUtils::findDataFile("SPY_1m.csv");
+    char data_path_buf[256];
+    strncpy_s(data_path_buf, sizeof(data_path_buf), data_path.c_str(), _TRUNCATE);
+
+    BacktestParams last_params = {start_amount, risk_reward, use_gpu, data_path};
+    double last_update_time = 0.0;
+
+    std::cout << "GUI window created successfully!" << std::endl;
+    std::cout << "Window should be visible now." << std::endl;
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
@@ -91,105 +145,130 @@ int main() {
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        if (!mode_selected) {
-            // Startup mode selection dialog
-            ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f), ImGuiCond_Always, ImVec2(0.5f, 0.5f));
-            ImGui::SetNextWindowSize(ImVec2(400, 200), ImGuiCond_Always);
-            
-            ImGui::Begin("Select Processing Mode", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
-            
-            ImGui::Text("Choose your processing mode:");
-            ImGui::Spacing();
-            
-            // CPU option
-            if (ImGui::Button("CPU Mode (Compatible)", ImVec2(180, 40))) {
-                use_gpu = false;
-                mode_selected = true;
-                glfwSetWindowTitle(window, "Trading Backtester - CPU Mode");
-            }
-            ImGui::SameLine();
-            ImGui::TextWrapped("Works on all systems\nSlower for large datasets");
-            
-            ImGui::Spacing();
-            
-            // GPU option (only if CUDA available)
-            if (cuda_available) {
-                if (ImGui::Button("GPU Mode (Fast)", ImVec2(180, 40))) {
-                    use_gpu = true;
-                    mode_selected = true;
-                    glfwSetWindowTitle(window, "Trading Backtester - GPU Mode");
-                }
-                ImGui::SameLine();
-                ImGui::TextWrapped("Requires NVIDIA GPU\nMuch faster computation");
-            } else {
-                ImGui::BeginDisabled();
-                ImGui::Button("GPU Mode (Unavailable)", ImVec2(180, 40));
-                ImGui::EndDisabled();
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "CUDA not installed\nInstall NVIDIA CUDA Toolkit");
-            }
-            
-            ImGui::Spacing();
-            ImGui::Separator();
-            ImGui::TextWrapped("You can change this later in the main interface.");
-            
-            ImGui::End();
+        ImGui::Begin("Trading Algorithm Backtester", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
+        
+        ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "=== TRADING ALGORITHM BACKTESTER ===");
+        ImGui::Separator();
+        
+        // Mode indicator
+        ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Mode: %s", use_gpu ? "GPU (Fast)" : "CPU (Compatible)");
+        
+        ImGui::Spacing();
+        
+        // Starting Amount Control
+        ImGui::Text("Starting Capital:");
+        ImGui::InputFloat("Amount ($)", &start_amount, 100.0f, 1000.0f, "%.0f");
+        ImGui::SameLine();
+        ImGui::Text("Current: $%.0f", start_amount);
+        
+        ImGui::Spacing();
+        
+        // Risk/Reward Control with Labels
+        ImGui::Text("Risk/Reward Ratio:");
+        ImGui::SliderFloat("##RiskReward", &risk_reward, 0.067f, 5.0f, "%.2f:1"); // 1:15 = 0.067, 5:1 = 5.0
+        
+        // Risk level indicator
+        std::string risk_label = getRiskLabel(risk_reward);
+        ImVec4 risk_color = getRiskColor(risk_reward);
+        ImGui::SameLine();
+        ImGui::TextColored(risk_color, "%s", risk_label.c_str());
+        
+        // Risk explanation
+        if (risk_reward <= 1.5f) {
+            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Conservative: Tight stops, smaller targets");
+        } else if (risk_reward <= 2.5f) {
+            ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Moderate: Balanced risk and reward");
+        } else if (risk_reward <= 3.5f) {
+            ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Aggressive: Larger stops, bigger targets");
         } else {
-            // Main backtest interface
-            ImGui::Begin("Backtest Controls");
-            
-            // Mode indicator
-            ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), 
-                "Mode: %s", use_gpu ? "GPU (Fast)" : "CPU (Compatible)");
-            
-            // Start amount input
-            ImGui::InputFloat("Start Amount ($)", &start_amount, 100.0f, 500.0f, "%.0f");
-            
-            // Risk/Reward slider with labels
-            ImGui::Text("Risk/Reward Ratio:");
-            ImGui::SliderFloat("##RiskReward", &risk_reward, 0.2f, 5.0f, "%.1f:1");
-            
-            // Risk level indicator
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Very Aggressive: High risk, high reward");
+        }
+        
+        ImGui::Spacing();
+        
+        // GPU/CPU Toggle
+        ImGui::Checkbox("Use GPU Acceleration", &use_gpu);
+        if (use_gpu) {
             ImGui::SameLine();
-            if (risk_reward >= 4.0f) {
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "VERY RISKY");
-            } else if (risk_reward >= 2.5f) {
-                ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "RISKY");
-            } else if (risk_reward >= 1.5f) {
-                ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "MODERATE");
-            } else {
-                ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "SAFE");
-            }
-            
-            // Mode switching (only if CUDA available)
-            if (cuda_available) {
-                ImGui::Spacing();
-                if (ImGui::Button(use_gpu ? "Switch to CPU Mode" : "Switch to GPU Mode")) {
-                    use_gpu = !use_gpu;
-                    glfwSetWindowTitle(window, use_gpu ? "Trading Backtester - GPU Mode" : "Trading Backtester - CPU Mode");
+            ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "(Faster)");
+        } else {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "(Compatible)");
+        }
+        
+        ImGui::Spacing();
+        
+        // Live Update Toggle
+        ImGui::Checkbox("Live Update (60 FPS)", &live_update);
+        if (live_update) {
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "(Real-time)");
+        }
+        
+        ImGui::Spacing();
+        
+        // Data File Path
+        ImGui::Text("Data File:");
+        ImGui::InputText("##DataPath", data_path_buf, sizeof(data_path_buf));
+        ImGui::SameLine();
+        if (ImGui::Button("Reload")) {
+            data_path = FileUtils::findDataFile("SPY_1m.csv");
+            strncpy_s(data_path_buf, sizeof(data_path_buf), data_path.c_str(), _TRUNCATE);
+        }
+        
+        ImGui::Spacing();
+        ImGui::Separator();
+        
+        // Control Buttons
+        if (ImGui::Button("Run Backtest", ImVec2(120, 30))) {
+            last_params = {start_amount, risk_reward, use_gpu, std::string(data_path_buf)};
+            running = true;
+            result_text = "Running backtest...";
+            run_backtest(last_params, result_text, running);
+            last_update_time = ImGui::GetTime();
+        }
+        
+        ImGui::SameLine();
+        if (ImGui::Button("Reset", ImVec2(80, 30))) {
+            start_amount = 1000.0f;
+            risk_reward = 2.0f;
+            use_gpu = false;
+            live_update = false;
+            result_text = "Settings reset. Click 'Run Backtest' to start...";
+        }
+        
+        ImGui::Spacing();
+        ImGui::Separator();
+        
+        // Live Update Logic
+        if (live_update) {
+            double now = ImGui::GetTime();
+            BacktestParams current_params = {start_amount, risk_reward, use_gpu, std::string(data_path_buf)};
+            if ((now - last_update_time > 1.0/60.0) && !running) {
+                if (current_params != last_params) {
+                    running = true;
+                    result_text = "Running...";
+                    run_backtest(current_params, result_text, running);
+                    last_params = current_params;
+                    last_update_time = now;
+                } else if (live_update) {
+                    // Even if params didn't change, rerun at 60 FPS if live_update is on
+                    running = true;
+                    result_text = "Running...";
+                    run_backtest(current_params, result_text, running);
+                    last_update_time = now;
                 }
             }
-            
-            // Explanation
-            ImGui::TextWrapped("Higher ratios = more aggressive (larger stops, bigger targets)");
-            ImGui::TextWrapped("Lower ratios = more conservative (tighter stops, smaller targets)");
-            if (use_gpu) {
-                ImGui::TextWrapped("GPU acceleration provides faster computation for large datasets");
-            } else {
-                ImGui::TextWrapped("CPU mode works on all systems but may be slower");
-            }
-            
-            ImGui::Separator();
-            
-            // Run backtest on EVERY frame (continuous updates)
-            run_backtest(start_amount, risk_reward, use_gpu, result_text);
-            
-            // Results
-            ImGui::Text("Results:");
-            ImGui::TextWrapped("%s", result_text.c_str());
-            
-            ImGui::End();
         }
+        
+        // Results Section
+        ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "=== RESULTS ===");
+        if (running) {
+            ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "Running backtest...");
+        }
+        ImGui::TextWrapped("%s", result_text.c_str());
+        
+        ImGui::End();
 
         ImGui::Render();
         int display_w, display_h;
