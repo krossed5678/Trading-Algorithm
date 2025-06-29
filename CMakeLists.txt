@@ -71,7 +71,6 @@ set(SOURCES
     src/MovingAverage.cpp
     src/Strategy.cpp
     src/Backtester.cpp
-    src/TradeLog.cpp
     src/strategy_grid_search.cpp
 )
 
@@ -87,13 +86,16 @@ endif()
 
 # Core sources (no main functions)
 set(CORE_SOURCES
+    src/Backtester.cpp
     src/DataLoader.cpp
+    src/GeneticStrategy.cpp
+    src/GPUStrategy.cpp
     src/MovingAverage.cpp
     src/Strategy.cpp
-    src/Backtester.cpp
-    src/TradeLog.cpp
-    src/GeneticStrategy.cpp
-    ${CUDA_SOURCES}
+    src/gui_main.cpp
+    src/main.cpp
+    src/genetic_evolution.cpp
+    src/strategy_grid_search.cpp
 )
 
 add_library(trading_core STATIC ${CORE_SOURCES})
