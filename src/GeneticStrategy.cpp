@@ -228,8 +228,8 @@ std::vector<StrategyGene> GeneticAlgorithm::evolve() {
     initializePopulation();
     
     for (int generation = 0; generation < generations_; ++generation) {
-        if (generation % 5 == 0) {
-            std::cout << "[INFO] Generation " << (generation + 1) << "/" << generations_ << std::endl;
+        if (generation % 10 == 0) {
+            std::cout << "[INFO] Generation " << (generation + 1) << "/" << generations_ << " (" << ((generation + 1) * 100 / generations_) << "%)" << std::endl;
         }
         
         evaluatePopulation();
@@ -240,7 +240,8 @@ std::vector<StrategyGene> GeneticAlgorithm::evolve() {
         if (best_in_gen->fitness > best_strategy_.fitness) {
             best_strategy_ = *best_in_gen;
             best_fitness_ = evaluateFitness(best_strategy_);
-            std::cout << "[INFO] New best strategy found! Fitness: " << best_strategy_.fitness << std::endl;
+            std::cout << "[INFO] Generation " << (generation + 1) << " - New best strategy found!" << std::endl;
+            std::cout << "[INFO] Fitness: " << best_strategy_.fitness << std::endl;
             std::cout << "[INFO] " << best_fitness_.toString() << std::endl;
         }
         

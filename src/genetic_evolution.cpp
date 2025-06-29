@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <cstdio>
 
 int main() {
     std::cout << "=== Trading Strategy Genetic Evolution ===" << std::endl;
@@ -39,8 +40,8 @@ int main() {
         std::cout << "[INFO] Data range: " << start_date << " to " << end_date << std::endl;
     }
     
-    int population_size = 20;
-    int generations = 20;
+    int population_size = 200;
+    int generations = 200;
     double mutation_rate = 0.1;
     double crossover_rate = 0.8;
     
@@ -49,6 +50,8 @@ int main() {
     std::cout << "  Generations: " << generations << std::endl;
     std::cout << "  Mutation Rate: " << mutation_rate << std::endl;
     std::cout << "  Crossover Rate: " << crossover_rate << std::endl;
+    std::cout << "  Estimated Time: ~" << (generations * population_size / 100) << " minutes" << std::endl;
+    std::cout << "  Mode: Overnight Training" << std::endl;
     
     auto start_time = std::chrono::high_resolution_clock::now();
     
@@ -69,6 +72,8 @@ int main() {
     
     std::string pine_script = ga.exportBestToPineScript();
     
+    // Before writing Pine Script, always delete any existing file
+    std::remove("best_strategy.pine");
     std::ofstream pine_file("best_strategy.pine");
     if (pine_file.is_open()) {
         pine_file << pine_script;
