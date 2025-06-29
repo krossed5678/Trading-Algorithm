@@ -67,6 +67,7 @@ set(SOURCES
     src/Strategy.cpp
     src/Backtester.cpp
     src/TradeLog.cpp
+    src/strategy_grid_search.cpp
 )
 
 # CUDA sources (only if CUDA is available)
@@ -79,23 +80,51 @@ else()
     set(CUDA_SOURCES "")
 endif()
 
-add_executable(trading_bot ${SOURCES} ${CUDA_SOURCES})
-
-# Benchmark executable
-add_executable(benchmark_performance benchmark_performance.cpp ${SOURCES} ${CUDA_SOURCES})
-
-# GUI sources
-set(GUI_SOURCES
-    src/gui_main.cpp
+# Core sources (no main functions)
+set(CORE_SOURCES
     src/DataLoader.cpp
     src/MovingAverage.cpp
     src/Strategy.cpp
     src/Backtester.cpp
     src/TradeLog.cpp
+    src/GeneticStrategy.cpp
     ${CUDA_SOURCES}
 )
 
-add_executable(trading_bot_gui ${GUI_SOURCES})
+add_library(trading_core STATIC ${CORE_SOURCES})
+target_include_directories(trading_core PUBLIC include)
+
+# Main CLI executable
+add_executable(trading_bot src/main.cpp)
+target_link_libraries(trading_bot PRIVATE trading_core)
+target_include_directories(trading_bot PRIVATE include)
+
+# Benchmark executable
+add_executable(benchmark_performance benchmark_performance.cpp)
+target_link_libraries(benchmark_performance PRIVATE trading_core)
+target_include_directories(benchmark_performance PRIVATE include)
+
+# GUI executable
+add_executable(trading_bot_gui src/gui_main.cpp)
+target_link_libraries(trading_bot_gui PRIVATE trading_core imgui glfw OpenGL::GL)
+target_include_directories(trading_bot_gui PRIVATE include ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends ${glfw_SOURCE_DIR}/include)
+
+# Grid search executable
+add_executable(strategy_grid_search src/strategy_grid_search.cpp)
+target_link_libraries(strategy_grid_search PRIVATE trading_core)
+target_include_directories(strategy_grid_search PRIVATE include)
+
+# Genetic evolution executable
+add_executable(genetic_evolution src/genetic_evolution.cpp)
+target_link_libraries(genetic_evolution PRIVATE trading_core)
+target_include_directories(genetic_evolution PRIVATE include)
+if(USE_CUDA)
+    target_compile_definitions(genetic_evolution PRIVATE USE_CUDA=1)
+else()
+    target_compile_definitions(genetic_evolution PRIVATE USE_CUDA=0)
+endif()
+set_property(TARGET genetic_evolution PROPERTY INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
+target_compile_options(genetic_evolution PRIVATE $<$<CONFIG:Release>:-O3>)
 
 # ImGui sources (core + backends)
 set(IMGUI_SOURCES
@@ -114,19 +143,6 @@ target_include_directories(imgui PUBLIC
     ${imgui_SOURCE_DIR}/backends
     ${glfw_SOURCE_DIR}/include
 )
-
-# Link everything for the GUI
-find_package(OpenGL REQUIRED)
-target_link_libraries(trading_bot_gui imgui glfw OpenGL::GL)
-target_include_directories(trading_bot_gui PRIVATE 
-    ${imgui_SOURCE_DIR} 
-    ${imgui_SOURCE_DIR}/backends
-    ${glfw_SOURCE_DIR}/include
-)
-
-target_include_directories(trading_bot PRIVATE include)
-target_include_directories(trading_bot_gui PRIVATE include)
-target_include_directories(benchmark_performance PRIVATE include)
 
 # Add compile definitions
 if(USE_CUDA)

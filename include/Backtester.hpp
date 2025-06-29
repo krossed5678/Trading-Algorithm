@@ -13,6 +13,8 @@ public:
     void printTotalGain() const;
     const std::map<int, double>& getYearlyPnL() const { return yearly_pnl_; }
     double getFinalEquity() const { return equity_; }
+    int getTotalTrades() const { return total_trades_; }
+    double getWinRate() const { return total_trades_ > 0 ? (double)winning_trades_ / total_trades_ : 0.0; }
 private:
     int calculateDaysInDataset() const;
     void calculateAdditionalMetrics() const;
@@ -23,4 +25,6 @@ private:
     double equity_;
     std::map<int, double> yearly_pnl_; // year -> P&L
     std::vector<double> equity_curve_;
+    int total_trades_ = 0;
+    int winning_trades_ = 0;
 };

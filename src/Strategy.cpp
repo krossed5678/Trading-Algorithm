@@ -54,26 +54,6 @@ std::pair<size_t, size_t> Strategy::calculateDynamicPeriods(const std::vector<OH
     return {sma_period, rsi_period};
 }
 
-class GoldenFoundationStrategy : public Strategy {
-public:
-    GoldenFoundationStrategy(double risk_reward = 3.0) : risk_reward_(risk_reward), precomputed_(false) {}
-    TradeSignal generateSignal(const std::vector<OHLCV>& data, size_t current_index) override;
-    
-    // Pre-compute all signals for better performance
-    void precomputeSignals(const std::vector<OHLCV>& data);
-    
-private:
-    double risk_reward_;
-    std::vector<double> sma_values_;
-    std::vector<double> rsi_values_;
-    std::vector<int> signals_;
-    std::vector<double> stops_;
-    std::vector<double> targets_;
-    bool precomputed_;
-    size_t sma_period_;
-    size_t rsi_period_;
-};
-
 void GoldenFoundationStrategy::precomputeSignals(const std::vector<OHLCV>& data) {
     if (data.empty()) return;
     
@@ -163,3 +143,6 @@ TradeSignal GoldenFoundationStrategy::generateSignal(const std::vector<OHLCV>& d
 Strategy* createGoldenFoundationStrategy(double risk_reward) {
     return new GoldenFoundationStrategy(risk_reward);
 }
+
+GoldenFoundationStrategy::GoldenFoundationStrategy(double risk_reward)
+    : risk_reward_(risk_reward), precomputed_(false), sma_period_(20), rsi_period_(7), rsi_oversold_(30.0) {}
