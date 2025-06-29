@@ -41,7 +41,7 @@ Trading-Algorithm/
 ### Prerequisites
 - **C++17** compatible compiler (GCC 7+, Clang 5+, MSVC 2017+)
 - **CMake** 3.16 or higher
-- **CUDA Toolkit** 11.0+ (for GPU acceleration)
+- **CUDA Toolkit** 11.0+ (for GPU acceleration, optional but recommended)
 - **Python 3.7+** (for data fetching)
 - **Polygon.io API key** (for data fetching)
 
@@ -61,6 +61,7 @@ Trading-Algorithm/
    cmake ..
    cmake --build . --config Release
    ```
+   - The build system will auto-detect CUDA. If found, GPU acceleration is enabled for the genetic algorithm.
 4. **Fetch market data**
    ```bash
    python fetch_spy_data.py
@@ -72,17 +73,17 @@ Trading-Algorithm/
    trading_bot_gui.exe
    ```
 6. **Run overnight genetic training**
-```bash
+   ```bash
    cd build/Release
    ../../overnight_training.bat
    # Results in overnight_results/
    ```
 
 ## ⚡ GPU Acceleration
-- The genetic algorithm can use CUDA to accelerate population-wide fitness evaluation.
-- Requires an NVIDIA GPU and CUDA Toolkit 11.0+.
-- The application will automatically use the GPU if available; otherwise, it falls back to CPU.
-- To force GPU mode, use the GUI toggle or set the appropriate flag in the config (see GUI instructions).
+- The genetic algorithm now uses CUDA to accelerate population-wide fitness evaluation if an NVIDIA GPU and CUDA Toolkit are available.
+- The build system will automatically enable GPU mode if CUDA is detected.
+- If CUDA is not available, the system will fall back to CPU evaluation.
+- No manual configuration is needed—just install CUDA and rebuild!
 
 ## 🧪 Automated Genetic Training
 - Use `overnight_training.bat` to run long genetic optimization sessions.

@@ -143,4 +143,9 @@ private:
     bool checkEntryCondition(const std::vector<OHLCV>& data, size_t index);
     double calculateStopLoss(const std::vector<OHLCV>& data, size_t index);
     double calculateTakeProfit(const std::vector<OHLCV>& data, size_t index);
-}; 
+};
+
+#ifdef USE_CUDA
+// Evaluate the fitness of the entire population on the GPU
+void evaluatePopulationGPU(std::vector<StrategyGene>& population, const std::vector<OHLCV>& data, std::vector<FitnessResult>& results);
+#endif 

@@ -7,6 +7,11 @@
 #include <cmath>
 #include <numeric>
 
+#ifdef USE_CUDA
+#include <cuda_runtime.h>
+extern "C" void evaluate_population_gpu(const void* h_genes, int population_size, const void* h_data, int data_size, void* h_results);
+#endif
+
 StrategyGene StrategyGene::random(std::mt19937& rng) {
     StrategyGene gene;
     
@@ -263,10 +268,15 @@ void GeneticAlgorithm::initializePopulation() {
 }
 
 void GeneticAlgorithm::evaluatePopulation() {
+#ifdef USE_CUDA
+    std::vector<FitnessResult> results;
+    evaluatePopulationGPU(population_, data_, results);
+#else
     for (auto& gene : population_) {
         FitnessResult result = evaluateFitness(gene);
         gene.fitness = result.fitness_score;
     }
+#endif
 }
 
 FitnessResult GeneticAlgorithm::evaluateFitness(const StrategyGene& gene) {
@@ -502,4 +512,64 @@ double EvolvedStrategy::calculateStopLoss(const std::vector<OHLCV>& data, size_t
 
 double EvolvedStrategy::calculateTakeProfit(const std::vector<OHLCV>& data, size_t index) {
     return data[index].close * (1.0 + gene_.take_profit_pct);
-} 
+}
+
+#ifdef USE_CUDA
+#include <cstring>
+struct CudaOHLCV {
+    double open, high, low, close, volume;
+};
+struct CudaStrategyGene {
+    int primary_indicator;
+    int secondary_indicator;
+    int primary_period;
+    int secondary_period;
+    double primary_threshold;
+    double secondary_threshold;
+    int entry_condition;
+    int exit_condition;
+    double risk_reward_ratio;
+    double stop_loss_pct;
+    double take_profit_pct;
+    int max_hold_time;
+    double position_size_pct;
+};
+struct CudaFitnessResult {
+    double total_return;
+    double sharpe_ratio;
+    double max_drawdown;
+    double win_rate;
+    int total_trades;
+    double profit_factor;
+    double calmar_ratio;
+    double fitness_score;
+};
+void evaluatePopulationGPU(std::vector<StrategyGene>& population, const std::vector<OHLCV>& data, std::vector<FitnessResult>& results) {
+    int pop_size = population.size();
+    int data_size = data.size();
+    std::vector<CudaStrategyGene> cuda_genes(pop_size);
+    std::vector<CudaOHLCV> cuda_data(data_size);
+    for (int i = 0; i < pop_size; ++i) {
+        const auto& g = population[i];
+        cuda_genes[i] = { (int)g.primary_indicator, (int)g.secondary_indicator, g.primary_period, g.secondary_period, g.primary_threshold, g.secondary_threshold, (int)g.entry_condition, (int)g.exit_condition, g.risk_reward_ratio, g.stop_loss_pct, g.take_profit_pct, g.max_hold_time, g.position_size_pct };
+    }
+    for (int i = 0; i < data_size; ++i) {
+        const auto& d = data[i];
+        cuda_data[i] = { d.open, d.high, d.low, d.close, d.volume };
+    }
+    std::vector<CudaFitnessResult> cuda_results(pop_size);
+    evaluate_population_gpu(cuda_genes.data(), pop_size, cuda_data.data(), data_size, cuda_results.data());
+    results.resize(pop_size);
+    for (int i = 0; i < pop_size; ++i) {
+        results[i].total_return = cuda_results[i].total_return;
+        results[i].sharpe_ratio = cuda_results[i].sharpe_ratio;
+        results[i].max_drawdown = cuda_results[i].max_drawdown;
+        results[i].win_rate = cuda_results[i].win_rate;
+        results[i].total_trades = cuda_results[i].total_trades;
+        results[i].profit_factor = cuda_results[i].profit_factor;
+        results[i].calmar_ratio = cuda_results[i].calmar_ratio;
+        results[i].fitness_score = cuda_results[i].fitness_score;
+        population[i].fitness = cuda_results[i].fitness_score;
+    }
+}
+#endif 

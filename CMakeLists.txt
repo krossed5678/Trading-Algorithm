@@ -9,6 +9,11 @@ if(CUDA_FOUND)
     set(CMAKE_CUDA_ARCHITECTURES native)
     set(USE_CUDA TRUE)
     message(STATUS "CUDA found - GPU acceleration enabled")
+    message(STATUS "CUDA found: ${CUDA_TOOLKIT_ROOT_DIR}")
+    add_definitions(-DUSE_CUDA)
+    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -O3")
+    cuda_add_library(gpu_kernels src/gpu_kernels.cu)
+    set(GPU_KERNELS_LIB gpu_kernels)
 else()
     set(USE_CUDA FALSE)
     message(STATUS "CUDA not found - using CPU-only version")
@@ -93,6 +98,7 @@ set(CORE_SOURCES
 
 add_library(trading_core STATIC ${CORE_SOURCES})
 target_include_directories(trading_core PUBLIC include)
+target_link_libraries(trading_core PRIVATE ${GPU_KERNELS_LIB})
 
 # Main CLI executable
 add_executable(trading_bot src/main.cpp)
@@ -116,7 +122,7 @@ target_include_directories(strategy_grid_search PRIVATE include)
 
 # Genetic evolution executable
 add_executable(genetic_evolution src/genetic_evolution.cpp)
-target_link_libraries(genetic_evolution PRIVATE trading_core)
+target_link_libraries(genetic_evolution PRIVATE trading_core ${GPU_KERNELS_LIB})
 target_include_directories(genetic_evolution PRIVATE include)
 if(USE_CUDA)
     target_compile_definitions(genetic_evolution PRIVATE USE_CUDA=1)

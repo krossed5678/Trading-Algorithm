@@ -457,3 +457,143 @@ void gpu_calculate_all_indicators_and_signals(
 }
 
 } // extern "C" 
+
+// CUDA-compatible versions of the structs
+struct CudaOHLCV {
+    double open, high, low, close, volume;
+};
+
+struct CudaStrategyGene {
+    int primary_indicator;
+    int secondary_indicator;
+    int primary_period;
+    int secondary_period;
+    double primary_threshold;
+    double secondary_threshold;
+    int entry_condition;
+    int exit_condition;
+    double risk_reward_ratio;
+    double stop_loss_pct;
+    double take_profit_pct;
+    int max_hold_time;
+    double position_size_pct;
+};
+
+struct CudaFitnessResult {
+    double total_return;
+    double sharpe_ratio;
+    double max_drawdown;
+    double win_rate;
+    int total_trades;
+    double profit_factor;
+    double calmar_ratio;
+    double fitness_score;
+};
+
+__device__ double cuda_max(double a, double b) { return a > b ? a : b; }
+__device__ double cuda_min(double a, double b) { return a < b ? a : b; }
+
+__device__ double calculateSharpeRatio(const double* returns, int n) {
+    if (n == 0) return 0.0;
+    double mean = 0.0;
+    for (int i = 0; i < n; ++i) mean += returns[i];
+    mean /= n;
+    double variance = 0.0;
+    for (int i = 0; i < n; ++i) variance += (returns[i] - mean) * (returns[i] - mean);
+    variance /= n;
+    double std_dev = sqrt(variance);
+    return (std_dev > 0) ? mean / std_dev : 0.0;
+}
+
+__device__ double calculateMaxDrawdown(const double* equity_curve, int n) {
+    if (n == 0) return 0.0;
+    double max_dd = 0.0, peak = equity_curve[0];
+    for (int i = 0; i < n; ++i) {
+        if (equity_curve[i] > peak) peak = equity_curve[i];
+        double dd = (peak - equity_curve[i]) / peak;
+        if (dd > max_dd) max_dd = dd;
+    }
+    return max_dd;
+}
+
+__device__ double calculateProfitFactor(const double* profits, int n_profits, const double* losses, int n_losses) {
+    double total_profit = 0.0, total_loss = 0.0;
+    for (int i = 0; i < n_profits; ++i) total_profit += profits[i];
+    for (int i = 0; i < n_losses; ++i) total_loss += losses[i];
+    return (total_loss > 0) ? total_profit / total_loss : (total_profit > 0) ? 1000.0 : 0.0;
+}
+
+__global__ void evaluate_population_kernel(
+    const CudaStrategyGene* genes,
+    const CudaOHLCV* data,
+    int population_size,
+    int data_size,
+    CudaFitnessResult* results
+) {
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    if (idx >= population_size) return;
+    const CudaStrategyGene& gene = genes[idx];
+    double current_equity = 10000.0;
+    int winning_trades = 0, total_trades = 0;
+    double equity_curve[1024]; // Assume max 1024 bars for demo; for real use, use dynamic alloc or limit size
+    double returns[1024];
+    double profits[256], losses[256];
+    int n_profits = 0, n_losses = 0;
+    int eq_idx = 0, ret_idx = 0;
+    for (int i = 0; i < data_size; ++i) {
+        // Simple buy signal: if close > open (placeholder for real logic)
+        if (data[i].close > data[i].open) {
+            double entry_price = data[i].close;
+            double stop_loss = entry_price * (1.0 - gene.stop_loss_pct);
+            double take_profit = entry_price * (1.0 + gene.take_profit_pct);
+            for (int j = i + 1; j < data_size; ++j) {
+                if (data[j].low <= stop_loss || data[j].high >= take_profit) {
+                    double exit_price = (data[j].low <= stop_loss) ? stop_loss : take_profit;
+                    double trade_return = (exit_price - entry_price) / entry_price;
+                    if (trade_return > 0) { winning_trades++; profits[n_profits++] = trade_return; }
+                    else { losses[n_losses++] = -trade_return; }
+                    total_trades++;
+                    current_equity *= (1 + trade_return * gene.position_size_pct);
+                    break;
+                }
+            }
+        }
+        equity_curve[eq_idx++] = current_equity;
+        if (i > 0) returns[ret_idx++] = (current_equity - equity_curve[i-1]) / equity_curve[i-1];
+    }
+    CudaFitnessResult result;
+    result.total_return = (current_equity - 10000.0) / 10000.0;
+    result.sharpe_ratio = calculateSharpeRatio(returns, ret_idx);
+    result.max_drawdown = calculateMaxDrawdown(equity_curve, eq_idx);
+    result.win_rate = (total_trades > 0) ? ((double)winning_trades / total_trades) : 0.0;
+    result.total_trades = total_trades;
+    result.profit_factor = calculateProfitFactor(profits, n_profits, losses, n_losses);
+    result.calmar_ratio = (result.max_drawdown > 0) ? result.total_return / result.max_drawdown : 0.0;
+    result.fitness_score = result.sharpe_ratio * 0.4 + result.total_return * 0.3 + result.win_rate * 0.2 + result.profit_factor * 0.1 - result.max_drawdown * 0.5;
+    results[idx] = result;
+}
+
+extern "C" void evaluate_population_gpu(
+    const CudaStrategyGene* h_genes,
+    int population_size,
+    const CudaOHLCV* h_data,
+    int data_size,
+    CudaFitnessResult* h_results
+) {
+    CudaStrategyGene* d_genes;
+    CudaOHLCV* d_data;
+    CudaFitnessResult* d_results;
+    cudaMalloc(&d_genes, population_size * sizeof(CudaStrategyGene));
+    cudaMalloc(&d_data, data_size * sizeof(CudaOHLCV));
+    cudaMalloc(&d_results, population_size * sizeof(CudaFitnessResult));
+    cudaMemcpy(d_genes, h_genes, population_size * sizeof(CudaStrategyGene), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_data, h_data, data_size * sizeof(CudaOHLCV), cudaMemcpyHostToDevice);
+    int blockSize = 128;
+    int numBlocks = (population_size + blockSize - 1) / blockSize;
+    evaluate_population_kernel<<<numBlocks, blockSize>>>(d_genes, d_data, population_size, data_size, d_results);
+    cudaDeviceSynchronize();
+    cudaMemcpy(h_results, d_results, population_size * sizeof(CudaFitnessResult), cudaMemcpyDeviceToHost);
+    cudaFree(d_genes);
+    cudaFree(d_data);
+    cudaFree(d_results);
+} 
