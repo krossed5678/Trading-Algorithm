@@ -1,7 +1,10 @@
 # Ignore build folders except the .exe
 /build/*
-!/build/Debug/trading_bot.exe
-
+!/build/Release/trading_bot.exe
+!/build/Release/trading_bot_gui.exe
+!/build/Release/benchmark_performance.exe
+!/build/Release/strategy_grid_search.exe
+!/build/Release/genetic_evolution.exe
 # Ignore Python cache
 __pycache__/
 *.pyc

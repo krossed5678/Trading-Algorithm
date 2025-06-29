@@ -13,12 +13,12 @@ StrategyGene StrategyGene::random(std::mt19937& rng) {
     std::uniform_int_distribution<int> indicator_dist(0, 7);
     std::uniform_int_distribution<int> entry_dist(0, 5);
     std::uniform_int_distribution<int> exit_dist(0, 3);
-    std::uniform_int_distribution<int> period_dist(5, 200);
-    std::uniform_real_distribution<double> threshold_dist(-50.0, 50.0);
-    std::uniform_real_distribution<double> rr_dist(1.0, 10.0);
-    std::uniform_real_distribution<double> pct_dist(0.005, 0.1);
-    std::uniform_int_distribution<int> time_dist(1, 168);
-    std::uniform_real_distribution<double> size_dist(0.01, 0.5);
+    std::uniform_int_distribution<int> period_dist(5, 20);
+    std::uniform_real_distribution<double> threshold_dist(-20.0, 20.0);
+    std::uniform_real_distribution<double> rr_dist(1.0, 5.0);
+    std::uniform_real_distribution<double> pct_dist(0.005, 0.05);
+    std::uniform_int_distribution<int> time_dist(1, 24);
+    std::uniform_real_distribution<double> size_dist(0.01, 0.3);
     
     gene.primary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
     gene.secondary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
@@ -42,12 +42,12 @@ void StrategyGene::mutate(std::mt19937& rng, double mutation_rate) {
     std::uniform_int_distribution<int> indicator_dist(0, 7);
     std::uniform_int_distribution<int> entry_dist(0, 5);
     std::uniform_int_distribution<int> exit_dist(0, 3);
-    std::uniform_int_distribution<int> period_dist(5, 200);
-    std::uniform_real_distribution<double> threshold_dist(-50.0, 50.0);
-    std::uniform_real_distribution<double> rr_dist(1.0, 10.0);
-    std::uniform_real_distribution<double> pct_dist(0.005, 0.1);
-    std::uniform_int_distribution<int> time_dist(1, 168);
-    std::uniform_real_distribution<double> size_dist(0.01, 0.5);
+    std::uniform_int_distribution<int> period_dist(5, 20);
+    std::uniform_real_distribution<double> threshold_dist(-20.0, 20.0);
+    std::uniform_real_distribution<double> rr_dist(1.0, 5.0);
+    std::uniform_real_distribution<double> pct_dist(0.005, 0.05);
+    std::uniform_int_distribution<int> time_dist(1, 24);
+    std::uniform_real_distribution<double> size_dist(0.01, 0.3);
     
     if (dist(rng) < mutation_rate) primary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
     if (dist(rng) < mutation_rate) secondary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
@@ -228,7 +228,9 @@ std::vector<StrategyGene> GeneticAlgorithm::evolve() {
     initializePopulation();
     
     for (int generation = 0; generation < generations_; ++generation) {
-        std::cout << "[INFO] Generation " << (generation + 1) << "/" << generations_ << std::endl;
+        if (generation % 5 == 0) {
+            std::cout << "[INFO] Generation " << (generation + 1) << "/" << generations_ << std::endl;
+        }
         
         evaluatePopulation();
         

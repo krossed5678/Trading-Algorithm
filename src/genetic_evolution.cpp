@@ -39,8 +39,8 @@ int main() {
         std::cout << "[INFO] Data range: " << start_date << " to " << end_date << std::endl;
     }
     
-    int population_size = 50;
-    int generations = 50;
+    int population_size = 20;
+    int generations = 20;
     double mutation_rate = 0.1;
     double crossover_rate = 0.8;
     

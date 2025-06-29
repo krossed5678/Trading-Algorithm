@@ -10,7 +10,7 @@ namespace Indicators {
     // Optimized SMA using SIMD and better memory access patterns
     double SMA(const std::vector<OHLCV>& data, size_t end_index, size_t period) {
         if (end_index + 1 < period) {
-            std::cerr << "[DEBUG] SMA: Not enough data for period " << period << " at index " << end_index << std::endl;
+            // std::cerr << "[DEBUG] SMA: Not enough data for period " << period << " at index " << end_index << std::endl;
             return 0.0;
         }
         
@@ -85,7 +85,7 @@ namespace Indicators {
     // Optimized RSI with SIMD and better numerical stability
     double RSI(const std::vector<OHLCV>& data, size_t end_index, size_t period) {
         if (end_index < period) {
-            std::cerr << "[DEBUG] RSI: Not enough data for period " << period << " at index " << end_index << std::endl;
+            // std::cerr << "[DEBUG] RSI: Not enough data for period " << period << " at index " << end_index << std::endl;
             return 50.0;
         }
         
@@ -174,7 +174,7 @@ namespace Indicators {
     // Optimized FVG detection with better logic
     bool detectFVG(const std::vector<OHLCV>& data, size_t end_index) {
         if (end_index < 2) {
-            std::cerr << "[DEBUG] FVG: Not enough data at index " << end_index << std::endl;
+            // std::cerr << "[DEBUG] FVG: Not enough data at index " << end_index << std::endl;
             return false;
         }
         
