@@ -9,11 +9,14 @@ int main() {
     std::cout << "=== Trading Strategy Genetic Evolution ===" << std::endl;
     
     std::vector<std::string> possible_paths = {
-        "data/SPY_1m.csv",
-        "../data/SPY_1m.csv", 
-        "../../data/SPY_1m.csv",
+        "/SPY_1m.csv",
+        "../SPY_1m.csv", 
+        "../../SPY_1m.csv",
         "../../../data/SPY_1m.csv"
     };
+    {
+        std::cout << "[INFO] Running in overnight mode" << std::endl;
+    }
     
     std::string data_path;
     auto data = std::vector<OHLCV>();
