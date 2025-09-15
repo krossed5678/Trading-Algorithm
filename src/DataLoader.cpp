@@ -4,50 +4,85 @@
 #include <iostream>
 #include <exception>
 
+//debug macros
+#define LOG(msg) std::cout << "[LOG] " << msg << std::endl;
+#define DEBUG(msg) std::cout << "[DEBUG] " << msg << std::endl;
+#define ERROR(msg) std::cerr << "[ERROR] " << msg << std::endl;
+
+static inline std::string trim(const std::string& s) {
+    std::string result = s;
+    result.erase(result.begin(),
+                 std::find_if(result.begin(), result.end(),
+                              [](unsigned char ch){ return !std::isspace(ch); }));
+    result.erase(std::find_if(result.rbegin(), result.rend(),
+                              [](unsigned char ch){ return !std::isspace(ch); }).base(),
+                 result.end());
+    return result;
+}
+
 std::vector<OHLCV> DataLoader::loadCSV(const std::string& filename) {
     std::vector<OHLCV> data;
+    LOG("Attempting to open file: " << filename);
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "[ERROR] Could not open file: " << filename << std::endl;
+        ERROR("Could not open file: " << filename);
         return data;
     }
     std::string line;
     // Skip header
     if (!std::getline(file, line)) {
-        std::cerr << "[ERROR] File is empty or missing header: " << filename << std::endl;
+        ERROR("File is empty or missing header: " << filename);
         return data;
     }
+    LOG("Header found, starting to parse rows");
     size_t line_num = 1;
+    size_t bad_lines = 0;
     while (std::getline(file, line)) {
         ++line_num;
         std::stringstream ss(line);
         std::string item;
         OHLCV bar;
         try {
-            // Timestamp
+            // Timestamps
             if (!std::getline(ss, bar.timestamp, ',')) throw std::runtime_error("Missing timestamp");
-            // Open
+            bar.timestamp = trim(bar.timestamp);
+
+            //O
             if (!std::getline(ss, item, ',')) throw std::runtime_error("Missing open");
-            bar.open = std::stod(item);
-            // High
+            bar.open = std::stod(trim(item));
+
+            //H
             if (!std::getline(ss, item, ',')) throw std::runtime_error("Missing high");
-            bar.high = std::stod(item);
-            // Low
+            bar.high = std::stod(trim(item));
+
+            //L
             if (!std::getline(ss, item, ',')) throw std::runtime_error("Missing low");
-            bar.low = std::stod(item);
-            // Close
+            bar.low = std::stod(trim(item));
+
+            //C
             if (!std::getline(ss, item, ',')) throw std::runtime_error("Missing close");
-            bar.close = std::stod(item);
-            // Volume
+            bar.close = std::stod(trim(item));
+
+            //Vol
             if (!std::getline(ss, item, ',')) throw std::runtime_error("Missing volume");
-            bar.volume = std::stod(item);
+            bar.volume = std::stod(trim(item));
+
             data.push_back(bar);
+
+            if (line_num % 10000 == 0) {
+                DEBUG("Parsed " << line_num << " lines so far...");
+            }
         } catch (const std::exception& e) {
-            std::cerr << "[ERROR] Parse error on line " << line_num << ": " << e.what() << std::endl;
-            std::cerr << "  Line content: " << line << std::endl;
-            // Optionally: continue; or break;
+            ++bad_lines;
+            ERROR("Parse error on line " << line_num << ": " << e.what());
+            ERROR("  Line content: " << line);
+            // Skip bad line
+            continue;
         }
     }
-    std::cerr << "[DEBUG] Finished loading CSV. Total bars: " << data.size() << std::endl;
+
+    LOG("Finished loading CSV. Total bars: " << data.size() << 
+        ", Skipped bad lines: " << bad_lines);
+
     return data;
 }

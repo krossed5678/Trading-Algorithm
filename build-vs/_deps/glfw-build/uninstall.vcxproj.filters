@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\0a67dd47c8c379c89b2e647d95f73f10\uninstall.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\CMakeFiles\uninstall" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7E2D7B31-7D24-36BE-9E66-DFBC5C679967}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

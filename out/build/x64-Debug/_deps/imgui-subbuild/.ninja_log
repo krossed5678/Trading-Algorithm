@@ -1,0 +1,21 @@
+# ninja log v6
+4	45	7775317739222056	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-mkdir	b79c613b0736057f
+4	45	7775317739222056	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-mkdir	b79c613b0736057f
+46	46917	7775318207942969	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-download	5d07ffa5dafb24a3
+46	46917	7775318207942969	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-download	5d07ffa5dafb24a3
+46918	47015	7775318207992963	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-update	91a61a72c42318d7
+46918	47015	7775318207992963	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-update	91a61a72c42318d7
+47015	47054	7775318209312984	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-patch	3d82ea1c609b0023
+47015	47054	7775318209312984	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-patch	3d82ea1c609b0023
+47054	47093	7775318209692974	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-configure	7f859e6a6fc9926e
+47054	47093	7775318209692974	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-configure	7f859e6a6fc9926e
+47093	47132	7775318210092962	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-build	bb83b466c29b0c71
+47093	47132	7775318210092962	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-build	bb83b466c29b0c71
+47133	47175	7775318210512999	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-install	402a2ec84fb97ec0
+47133	47175	7775318210512999	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-install	402a2ec84fb97ec0
+47175	47216	7775318210922989	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-test	6f010b8e6a554132
+47175	47216	7775318210922989	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-test	6f010b8e6a554132
+47216	47271	7775318211482974	CMakeFiles/imgui-populate-complete	b93469d81e987647
+47216	47271	7775318211482974	imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-done	b93469d81e987647
+47216	47271	7775318211482974	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/CMakeFiles/imgui-populate-complete	b93469d81e987647
+47216	47271	7775318211482974	C:/Users/koanr/Desktop/C++/Trading-Algorithm/out/build/x64-Debug/_deps/imgui-subbuild/imgui-populate-prefix/src/imgui-populate-stamp/imgui-populate-done	b93469d81e987647

@@ -6,46 +6,80 @@
 #include <sstream>
 #include <cmath>
 #include <numeric>
+#include <limits>
+#include <random>
 
 #ifdef USE_CUDA
 #include <cuda_runtime.h>
 extern "C" void evaluate_population_gpu(const void* h_genes, int population_size, const void* h_data, int data_size, void* h_results);
 #endif
 
+// Logging macros for extensive tracing
+#define LOG(msg)     std::cout << "[LOG] " << msg << std::endl;
+#define INFO(msg)    std::cout << "[INFO] " << msg << std::endl;
+#define SUCCESS(msg) std::cout << "[SUCCESS] " << msg << std::endl;
+#define ERROR(msg)   std::cerr << "[ERROR] " << msg << std::endl;
+#define DEBUG(msg)   std::cout << "[DEBUG] " << msg << std::endl;
+
+struct OHLCV;
+
+enum class IndicatorType {
+    SMA,
+    EMA,
+    RSI,
+    MACD,
+    BB,
+    ATR,
+    STOCH,
+    ADX,
+    COUNT  // Always last for iteration purposes
+};
+
+enum class EntryCondition {
+    CROSS_ABOVE, CROSS_BELOW, ABOVE, BELOW, INSIDE_BB, OUTSIDE_BB, COUNT
+};
+
+enum class ExitCondition {
+    FIXED_RR,
+    TRAILING_STOP,
+    TIME_BASED,
+    INDICATOR_SIGNAL,
+    COUNT  // Always last
+};
+
 StrategyGene StrategyGene::random(std::mt19937& rng) {
-    StrategyGene gene;
-    
-    std::uniform_int_distribution<int> indicator_dist(0, 7);
-    std::uniform_int_distribution<int> entry_dist(0, 5);
-    std::uniform_int_distribution<int> exit_dist(0, 3);
-    std::uniform_int_distribution<int> period_dist(5, 20);
-    std::uniform_real_distribution<double> threshold_dist(-20.0, 20.0);
+    StrategyGene g;
+    std::uniform_int_distribution<int> indicator_dist(0, static_cast<int>(IndicatorType::COUNT) - 1);
+    std::uniform_int_distribution<int> entry_dist(0, static_cast<int>(EntryCondition::COUNT) - 1);
+    std::uniform_int_distribution<int> exit_dist(0, static_cast<int>(ExitCondition::COUNT) - 1);
+    std::uniform_int_distribution<int> period_dist(5, 50);
+    std::uniform_real_distribution<double> thr_dist(-30.0, 30.0);
     std::uniform_real_distribution<double> rr_dist(1.0, 5.0);
-    std::uniform_real_distribution<double> pct_dist(0.005, 0.05);
-    std::uniform_int_distribution<int> time_dist(1, 24);
+    std::uniform_real_distribution<double> pct_dist(0.005, 0.10);
+    std::uniform_int_distribution<int> hold_dist(1, 48);
     std::uniform_real_distribution<double> size_dist(0.01, 0.3);
-    
-    gene.primary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
-    gene.secondary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
-    gene.primary_period = period_dist(rng);
-    gene.secondary_period = period_dist(rng);
-    gene.primary_threshold = threshold_dist(rng);
-    gene.secondary_threshold = threshold_dist(rng);
-    gene.entry_condition = static_cast<EntryCondition>(entry_dist(rng));
-    gene.exit_condition = static_cast<ExitCondition>(exit_dist(rng));
-    gene.risk_reward_ratio = rr_dist(rng);
-    gene.stop_loss_pct = pct_dist(rng);
-    gene.take_profit_pct = pct_dist(rng);
-    gene.max_hold_time = time_dist(rng);
-    gene.position_size_pct = size_dist(rng);
-    
-    return gene;
+
+    g.primary_indicator   = static_cast<IndicatorType>(indicator_dist(rng));
+    g.secondary_indicator = static_cast<IndicatorType>(indicator_dist(rng));
+    g.primary_period      = period_dist(rng);
+    g.secondary_period    = period_dist(rng);
+    g.primary_threshold   = thr_dist(rng);
+    g.secondary_threshold = thr_dist(rng);
+    g.entry_condition     = static_cast<EntryCondition>(entry_dist(rng));
+    g.exit_condition      = static_cast<ExitCondition>(exit_dist(rng));
+    g.risk_reward_ratio   = rr_dist(rng);
+    g.stop_loss_pct       = pct_dist(rng);
+    g.take_profit_pct     = pct_dist(rng);
+    g.max_hold_time       = hold_dist(rng);
+    g.position_size_pct   = std::clamp(size_dist(rng), 0.0001, 1.0);
+
+    return g;
 }
 
 void StrategyGene::mutate(std::mt19937& rng, double mutation_rate) {
     std::uniform_real_distribution<double> dist(0.0, 1.0);
     std::uniform_int_distribution<int> indicator_dist(0, 7);
-    std::uniform_int_distribution<int> entry_dist(0, 5);
+    std::uniform_int_distribution<int> entry_dist(0, static_cast<int>(EntryCondition::COUNT) - 1);
     std::uniform_int_distribution<int> exit_dist(0, 3);
     std::uniform_int_distribution<int> period_dist(5, 20);
     std::uniform_real_distribution<double> threshold_dist(-20.0, 20.0);
@@ -281,42 +315,38 @@ void GeneticAlgorithm::evaluatePopulation() {
 
 FitnessResult GeneticAlgorithm::evaluateFitness(const StrategyGene& gene) {
     EvolvedStrategy strategy(gene);
-    
+    DEBUG("Evaluating fitness for strategy gene");
     std::vector<double> equity_curve;
     std::vector<double> returns;
     std::vector<double> profits, losses;
-    
     double current_equity = 10000.0;
     int winning_trades = 0;
     int total_trades = 0;
-    
     for (size_t i = 0; i < data_.size(); ++i) {
         TradeSignal signal = strategy.generateSignal(data_, i);
-        
         if (signal.type == SignalType::BUY) {
             double entry_price = data_[i].close;
             double stop_loss = signal.stop_loss;
             double take_profit = signal.take_profit;
-            
+            LOG("Trade signal at bar " << i << ": entry=" << entry_price << ", SL=" << stop_loss << ", TP=" << take_profit);
             for (size_t j = i + 1; j < data_.size(); ++j) {
                 if (data_[j].low <= stop_loss || data_[j].high >= take_profit) {
                     double exit_price = (data_[j].low <= stop_loss) ? stop_loss : take_profit;
                     double trade_return = (exit_price - entry_price) / entry_price;
-                    
                     if (trade_return > 0) {
+                        LOG("Winning trade: entry=" << entry_price << ", exit=" << exit_price << ", return=" << trade_return);
                         winning_trades++;
                         profits.push_back(trade_return);
                     } else {
+                        LOG("Losing trade: entry=" << entry_price << ", exit=" << exit_price << ", return=" << trade_return);
                         losses.push_back(-trade_return);
                     }
-                    
                     total_trades++;
                     current_equity *= (1 + trade_return * gene.position_size_pct);
                     break;
                 }
             }
         }
-        
         equity_curve.push_back(current_equity);
         if (i > 0) {
             returns.push_back((current_equity - equity_curve[i-1]) / equity_curve[i-1]);
@@ -436,18 +466,19 @@ double GeneticAlgorithm::calculateProfitFactor(const std::vector<double>& profit
 EvolvedStrategy::EvolvedStrategy(const StrategyGene& gene) : gene_(gene) {}
 
 TradeSignal EvolvedStrategy::generateSignal(const std::vector<OHLCV>& data, size_t current_index) {
+    DEBUG("generateSignal called for index " << current_index);
     if (!precomputed_) {
+        DEBUG("Precomputing indicators");
         precomputeIndicators(data);
     }
-    
     if (current_index < std::max(gene_.primary_period, gene_.secondary_period)) {
+        DEBUG("Not enough data for index " << current_index << ", required: " << std::max(gene_.primary_period, gene_.secondary_period));
         return {SignalType::NONE, current_index, 0.0, 0.0, "Not enough data"};
     }
-    
     if (checkEntryCondition(data, current_index)) {
         double stop_loss = calculateStopLoss(data, current_index);
         double take_profit = calculateTakeProfit(data, current_index);
-        
+        DEBUG("Signal generated: BUY at index " << current_index << ", SL: " << stop_loss << ", TP: " << take_profit);
         return {
             SignalType::BUY,
             current_index,
@@ -455,8 +486,9 @@ TradeSignal EvolvedStrategy::generateSignal(const std::vector<OHLCV>& data, size
             take_profit,
             "Evolved Strategy Signal"
         };
+    } else {
+        DEBUG("No entry condition met at index " << current_index);
     }
-    
     return {SignalType::NONE, current_index, 0.0, 0.0, "No signal"};
 }
 
@@ -487,23 +519,37 @@ bool EvolvedStrategy::checkEntryCondition(const std::vector<OHLCV>& data, size_t
     double primary_val = primary_values_[index];
     double secondary_val = secondary_values_[index];
     double close = data[index].close;
-    
+    DEBUG("checkEntryCondition: index=" << index << ", primary_val=" << primary_val << ", secondary_val=" << secondary_val << ", close=" << close);
     switch (gene_.entry_condition) {
         case StrategyGene::EntryCondition::CROSS_ABOVE:
-            return primary_val > gene_.primary_threshold && 
-                   primary_values_[index-1] <= gene_.primary_threshold;
+            if (primary_val > gene_.primary_threshold && primary_values_[index-1] <= gene_.primary_threshold) {
+                DEBUG("CROSS_ABOVE condition met");
+                return true;
+            }
+            break;
         case StrategyGene::EntryCondition::CROSS_BELOW:
-            return primary_val < gene_.primary_threshold && 
-                   primary_values_[index-1] >= gene_.primary_threshold;
+            if (primary_val < gene_.primary_threshold && primary_values_[index-1] >= gene_.primary_threshold) {
+                DEBUG("CROSS_BELOW condition met");
+                return true;
+            }
+            break;
         case StrategyGene::EntryCondition::ABOVE:
-            return primary_val > gene_.primary_threshold && 
-                   secondary_val > gene_.secondary_threshold;
+            if (primary_val > gene_.primary_threshold && secondary_val > gene_.secondary_threshold) {
+                DEBUG("ABOVE condition met");
+                return true;
+            }
+            break;
         case StrategyGene::EntryCondition::BELOW:
-            return primary_val < gene_.primary_threshold && 
-                   secondary_val < gene_.secondary_threshold;
+            if (primary_val < gene_.primary_threshold && secondary_val < gene_.secondary_threshold) {
+                DEBUG("BELOW condition met");
+                return true;
+            }
+            break;
         default:
-            return false;
+            DEBUG("No entry condition met for index " << index);
+            break;
     }
+    return false;
 }
 
 double EvolvedStrategy::calculateStopLoss(const std::vector<OHLCV>& data, size_t index) {
@@ -572,4 +618,4 @@ void evaluatePopulationGPU(std::vector<StrategyGene>& population, const std::vec
         population[i].fitness = cuda_results[i].fitness_score;
     }
 }
-#endif 
+#endif

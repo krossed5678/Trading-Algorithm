@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A65CE1CB-3828-3AF4-8BBF-6C826916D25F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.9.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompilerABI.cu;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDALinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCUDALinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompilerABI.cu;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDALinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCUDALinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompilerABI.cu;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDALinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCUDALinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDACompilerABI.cu;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineCompilerSupport.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCUDACompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CrayClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Diab-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\OrangeC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Renesas-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TIClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-C-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesAll.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesNative.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAArchitecturesValidate.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDAFilterImplicitLibs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCUDALinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeDetermineLinkerId.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCUDALinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeInspectCXXLinker.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCFilterImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeNVCCParseImplicitInfo.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\ZERO_CHECK.vcxproj">
+      <Project>{B21E21BD-0AB1-334F-BF2B-7A8576FDA89E}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\benchmark_performance.vcxproj">
+      <Project>{5FF52D0C-0B1E-30E1-878C-51EB2E3AD32A}</Project>
+      <Name>benchmark_performance</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\boing.vcxproj">
+      <Project>{9F4BFB0B-4429-32FC-B617-12EE6FC0A5AD}</Project>
+      <Name>boing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\clipboard.vcxproj">
+      <Project>{44BF0729-2AF1-326F-80B2-4510E2FD6C93}</Project>
+      <Name>clipboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\cursor.vcxproj">
+      <Project>{AE3CF528-8185-382A-9530-4AFAC98F174C}</Project>
+      <Name>cursor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\empty.vcxproj">
+      <Project>{112D44DB-2C2D-3CEB-A76F-8862E1F2CFAF}</Project>
+      <Name>empty</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\events.vcxproj">
+      <Project>{AB936DD3-D9E5-35B2-BD6D-078F6EA46F00}</Project>
+      <Name>events</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\gamma.vcxproj">
+      <Project>{D26B78DB-1160-3B3C-94D3-81628ABBC733}</Project>
+      <Name>gamma</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\gears.vcxproj">
+      <Project>{FE1EB350-D1FF-3372-94C6-1EA3793A1273}</Project>
+      <Name>gears</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\genetic_evolution.vcxproj">
+      <Project>{8863F57B-3BEC-33E6-9AAD-656D47F942A9}</Project>
+      <Name>genetic_evolution</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\src\glfw.vcxproj">
+      <Project>{E62E45FE-4E26-3923-B68E-2FEE4A106452}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\glfwinfo.vcxproj">
+      <Project>{075966E5-AA1D-33B1-A0B1-1C799998F061}</Project>
+      <Name>glfwinfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\gpu_kernels.vcxproj">
+      <Project>{81E9329A-CFCC-3E54-8286-31E30FD950C1}</Project>
+      <Name>gpu_kernels</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\heightmap.vcxproj">
+      <Project>{3914E90A-A04F-31D9-895E-D0083DB95A3D}</Project>
+      <Name>heightmap</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\icon.vcxproj">
+      <Project>{D2320D55-490F-38CC-9E10-E32F8CA8177E}</Project>
+      <Name>icon</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\iconify.vcxproj">
+      <Project>{2C65597F-2FE4-3406-BF28-27E08A028F80}</Project>
+      <Name>iconify</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\imgui.vcxproj">
+      <Project>{ACE9BEBA-D35B-3DD6-BCC7-F4CCFCA824AF}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\inputlag.vcxproj">
+      <Project>{BEB602C7-6E6A-3D67-B5DA-8A8A45EACCE6}</Project>
+      <Name>inputlag</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\joysticks.vcxproj">
+      <Project>{07D207A9-EEB6-3432-A935-D042FD4BDA7D}</Project>
+      <Name>joysticks</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\monitors.vcxproj">
+      <Project>{ABAA604F-8F6A-31C0-8D79-B13F058C1D3C}</Project>
+      <Name>monitors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\msaa.vcxproj">
+      <Project>{2B45B968-AE2F-308F-A533-EAEA43AD7C29}</Project>
+      <Name>msaa</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\offscreen.vcxproj">
+      <Project>{E4CCACD9-DB5D-3B75-ABA8-A85D322D9463}</Project>
+      <Name>offscreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\opacity.vcxproj">
+      <Project>{BB08413F-CA5D-3413-B3ED-DB2963967076}</Project>
+      <Name>opacity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\particles.vcxproj">
+      <Project>{79E857AC-6AC3-39E4-B353-F23D208BE763}</Project>
+      <Name>particles</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\reopen.vcxproj">
+      <Project>{2569E74C-0780-3626-B410-55F54F23E5D9}</Project>
+      <Name>reopen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\sharing.vcxproj">
+      <Project>{95BB9C17-FEC5-347B-9020-C889D028F45D}</Project>
+      <Name>sharing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\simple.vcxproj">
+      <Project>{75725BDD-F0D9-326B-9036-CBC274ACADB7}</Project>
+      <Name>simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\splitview.vcxproj">
+      <Project>{839014AB-3805-39EF-A0CD-1073B6D6FE96}</Project>
+      <Name>splitview</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\strategy_grid_search.vcxproj">
+      <Project>{606B3AB5-5383-3FEF-AFE5-15CAFF3E0E65}</Project>
+      <Name>strategy_grid_search</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\tearing.vcxproj">
+      <Project>{4F9F1CD5-EE19-3945-B56D-DB4B4AE42468}</Project>
+      <Name>tearing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\threads.vcxproj">
+      <Project>{C905DA14-0CBD-3CFA-AB6A-06D0E685E324}</Project>
+      <Name>threads</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\timeout.vcxproj">
+      <Project>{ECE0A10F-E0F4-3446-9AFF-33A571DC41A5}</Project>
+      <Name>timeout</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\title.vcxproj">
+      <Project>{53654986-550C-3035-B452-305580EF480A}</Project>
+      <Name>title</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\trading_bot.vcxproj">
+      <Project>{9748B835-08BB-39EB-9AED-05897A8DB365}</Project>
+      <Name>trading_bot</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\trading_bot_gui.vcxproj">
+      <Project>{45A53230-0369-3347-9C6B-EF60B92110DC}</Project>
+      <Name>trading_bot_gui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\trading_core.vcxproj">
+      <Project>{8C3A7834-3C2E-3890-8B3F-C6A607E32684}</Project>
+      <Name>trading_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\triangle-vulkan.vcxproj">
+      <Project>{D5ED5659-37F6-3747-9E29-BDED08871B59}</Project>
+      <Name>triangle-vulkan</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\examples\wave.vcxproj">
+      <Project>{698A29F8-4614-3014-A962-383A4BBEE58D}</Project>
+      <Name>wave</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-build\tests\windows.vcxproj">
+      <Project>{4E9ADEB8-3DF2-363C-81A2-C68C6FE2BC51}</Project>
+      <Name>windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.9.targets" />
+  </ImportGroup>
+</Project>

@@ -1,0 +1,14 @@
+# Target labels
+ glfw-populate
+# Source files and their labels
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/glfw-populate
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/753004f893f77d847756276e2494961d/glfw-populate.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/89408c04d0240192aeac2a1c11e4b484/glfw-populate-complete.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-build.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-configure.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-download.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-install.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-mkdir.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-patch.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-test.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-subbuild/CMakeFiles/f6c1c8a65f1f00b1e1b755f29fa142bd/glfw-populate-update.rule

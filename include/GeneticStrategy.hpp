@@ -26,17 +26,17 @@ struct StrategyGene {
     // Strategy parameters
     IndicatorType primary_indicator = IndicatorType::SMA;
     IndicatorType secondary_indicator = IndicatorType::RSI;
-    int primary_period = 20;
-    int secondary_period = 14;
+    int primary_period = 15;
+    int secondary_period = 7;
     double primary_threshold = 0.0;
     double secondary_threshold = 30.0;
     EntryCondition entry_condition = EntryCondition::CROSS_ABOVE;
     ExitCondition exit_condition = ExitCondition::FIXED_RR;
-    double risk_reward_ratio = 2.0;
-    double stop_loss_pct = 0.02;
+    double risk_reward_ratio = 2.5;
+    double stop_loss_pct = 0.045;
     double take_profit_pct = 0.04;
-    int max_hold_time = 48; // hours
-    double position_size_pct = 0.1;
+    int max_hold_time = 24;
+    double position_size_pct = 0.25;
     
     // Fitness score
     double fitness = 0.0;

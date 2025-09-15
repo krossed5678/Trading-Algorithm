@@ -1,0 +1,26 @@
+^C:\USERS\KOANR\DESKTOP\C++\TRADING-ALGORITHM\SRC\GPU_KERNELS.CU
+setlocal
+cd C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\CMakeFiles\gpu_kernels.dir\src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/gpu_kernels.dir/src/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -D verbose:BOOL=OFF -D "CCBIN:PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools/MSVC/14.42.34433/bin/Hostx64/x64" -D build_configuration:STRING=Debug -D generated_file:STRING=C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/gpu_kernels.dir/src/Debug/gpu_kernels_generated_gpu_kernels.cu.obj -D generated_cubin_file:STRING=C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/gpu_kernels.dir/src/Debug/gpu_kernels_generated_gpu_kernels.cu.obj.cubin.txt -P C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/gpu_kernels.dir/src/gpu_kernels_generated_gpu_kernels.cu.obj.Debug.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\KOANR\DESKTOP\C++\TRADING-ALGORITHM\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

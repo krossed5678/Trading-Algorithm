@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\tests\events.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\deps\getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\deps\glad_gl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\deps\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\deps\glad\gl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{29BED4AC-5F99-3E21-80BC-D11F8BFEAD9C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ABD813C3-FC8C-3CEA-92D5-9CF069BEE40D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\examples\sharing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\deps\glad_gl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\deps\glad\gl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\examples\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\build-vs\_deps\glfw-src\examples\glfw.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{7FEA0E01-ECB9-3AAA-AD38-F489BE4A28A8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CEF34D18-AECA-32C7-BDAD-08DFB6896003}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

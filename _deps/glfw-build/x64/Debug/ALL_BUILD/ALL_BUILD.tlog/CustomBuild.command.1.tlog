@@ -1,0 +1,10 @@
+^C:\USERS\KOANR\DESKTOP\C++\TRADING-ALGORITHM\_DEPS\GLFW-SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/glfw-build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

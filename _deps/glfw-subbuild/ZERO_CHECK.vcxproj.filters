@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\753004f893f77d847756276e2494961d\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A965D3AA-D01F-3F6D-9F18-7B7CAF150ABB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

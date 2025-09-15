@@ -1,0 +1,10 @@
+^C:\USERS\KOANR\DESKTOP\C++\TRADING-ALGORITHM\CMAKEFILES\A401775A89F070D6C55D8C8AFD057FCA\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/trading_bot.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

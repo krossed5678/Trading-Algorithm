@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\41bd000d7c40eff8473ca669852c5a73\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-src\CMake\GenerateMappings.cmake" />
+    <None Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{77D880B6-BB16-37F4-8A73-3786B55FD30B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{29BED4AC-5F99-3E21-80BC-D11F8BFEAD9C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

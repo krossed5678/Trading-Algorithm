@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/imgui-populate"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/91992cadf80ddab9ac9f3e57c900b509/imgui-populate.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/45376d4bc33848ecda3a7d380efd361f/imgui-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/imgui-subbuild/CMakeFiles/b2d286a826d59c52fd37d723ece1f3c9/imgui-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"imgui-populate"
+		],
+		"name" : "imgui-populate"
+	}
+}

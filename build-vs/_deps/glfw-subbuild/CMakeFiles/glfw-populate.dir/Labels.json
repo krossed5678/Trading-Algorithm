@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/glfw-populate"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d6980502fae92ce985c10f9f2d278a07/glfw-populate.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/dc0b8a436ab2326c45f9e57d2025f755/glfw-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/koanr/Desktop/C++/Trading-Algorithm/build-vs/_deps/glfw-subbuild/CMakeFiles/d107447732d2e7bcef9d0e8b896c1f3d/glfw-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glfw-populate"
+		],
+		"name" : "glfw-populate"
+	}
+}

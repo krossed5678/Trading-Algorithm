@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{32D309E6-13F0-3587-9983-6A189AE0CDC5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.9.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/koanr/Desktop/C++/Trading-Algorithm -BC:/Users/koanr/Desktop/C++/Trading-Algorithm --check-stamp-file C:/Users/koanr/Desktop/C++/Trading-Algorithm/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCUDAInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Compiler\NVIDIA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\run_nvcc.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindCUDA\select_compute_arch.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows-NVIDIA-CUDA.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.1\Modules\Platform\WindowsPaths.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCUDACompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeCXXCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeRCCompiler.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\4.1.0-rc1\CMakeSystem.cmake;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.cmake.pre-gen;C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\gpu_kernels_generated_gpu_kernels.cu.obj.depend;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\ZERO_CHECK.vcxproj">
+      <Project>{D13D95F3-EBFB-357B-A861-7541CA80BDCB}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\benchmark_performance.vcxproj">
+      <Project>{9BAF8CF4-4096-39CB-ADC8-73DE4079B5A0}</Project>
+      <Name>benchmark_performance</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\boing.vcxproj">
+      <Project>{F5CB786B-C31D-311B-9DCE-0CEDA7741483}</Project>
+      <Name>boing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\clipboard.vcxproj">
+      <Project>{D6CCE38F-61F7-3DEE-9B62-56B4122AADBB}</Project>
+      <Name>clipboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\cursor.vcxproj">
+      <Project>{DBC0EFE6-0010-37B6-9451-1E90AE347162}</Project>
+      <Name>cursor</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\empty.vcxproj">
+      <Project>{F38C5420-05E5-3FF5-8D07-DC080B76E5E9}</Project>
+      <Name>empty</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\events.vcxproj">
+      <Project>{96B0DD95-6935-3670-AC39-43AB0E8F3003}</Project>
+      <Name>events</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\gamma.vcxproj">
+      <Project>{928087B6-D8F8-3DCA-9079-69FA02339C64}</Project>
+      <Name>gamma</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\gears.vcxproj">
+      <Project>{72EC645B-F5E3-3C9C-B49C-287CBC687F99}</Project>
+      <Name>gears</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\genetic_evolution.vcxproj">
+      <Project>{DEDA2939-B995-3FFE-9FF8-9FFA5B8FFE58}</Project>
+      <Name>genetic_evolution</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\src\glfw.vcxproj">
+      <Project>{FFAC485D-9B6A-38B9-B94A-F0D70C5C79A0}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\glfwinfo.vcxproj">
+      <Project>{D3D1B1C9-62FC-35BE-A8AF-002BC31D755A}</Project>
+      <Name>glfwinfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\gpu_kernels.vcxproj">
+      <Project>{18E3F05F-4EA6-3182-8BBA-570943DB3B34}</Project>
+      <Name>gpu_kernels</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\heightmap.vcxproj">
+      <Project>{A9AFC1BE-4AA4-3D5D-B451-3977C90499BF}</Project>
+      <Name>heightmap</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\icon.vcxproj">
+      <Project>{57855818-13D1-331A-AC8A-E6B759B8738F}</Project>
+      <Name>icon</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\iconify.vcxproj">
+      <Project>{40EC3E61-0294-39AA-987F-269D65968EBB}</Project>
+      <Name>iconify</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\imgui.vcxproj">
+      <Project>{3CE90169-FEC3-3C64-B539-209F955D9451}</Project>
+      <Name>imgui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\inputlag.vcxproj">
+      <Project>{69FB96A6-0BB9-3967-8214-1975897E8C8F}</Project>
+      <Name>inputlag</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\joysticks.vcxproj">
+      <Project>{6AF6C113-188A-3CAF-A97D-86B4AF6FC285}</Project>
+      <Name>joysticks</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\monitors.vcxproj">
+      <Project>{C892A3F1-AB31-31D3-A86E-5C064B82A7A6}</Project>
+      <Name>monitors</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\msaa.vcxproj">
+      <Project>{94027B02-796D-309F-8609-95F84B8126CE}</Project>
+      <Name>msaa</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\offscreen.vcxproj">
+      <Project>{1324E31B-9D61-3332-81D5-BDA4778A8F75}</Project>
+      <Name>offscreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\opacity.vcxproj">
+      <Project>{8777D632-587E-375A-83E3-227F6D2F4F2A}</Project>
+      <Name>opacity</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\particles.vcxproj">
+      <Project>{30F5CA61-CE74-3DB2-B0FB-FE6DBFAEEFB4}</Project>
+      <Name>particles</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\reopen.vcxproj">
+      <Project>{6AF7AB68-D9BC-378D-B8F8-A955DDA09737}</Project>
+      <Name>reopen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\sharing.vcxproj">
+      <Project>{76398083-6301-3E8D-8358-05765F7F0E3A}</Project>
+      <Name>sharing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\simple.vcxproj">
+      <Project>{77674549-5B8B-34BC-96D7-0191AD43C1AD}</Project>
+      <Name>simple</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\splitview.vcxproj">
+      <Project>{BB5989E2-7886-373C-8291-138A671B0DD3}</Project>
+      <Name>splitview</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\strategy_grid_search.vcxproj">
+      <Project>{59A47C0F-8191-37E1-AEB8-3B87F756180D}</Project>
+      <Name>strategy_grid_search</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\tearing.vcxproj">
+      <Project>{28128752-1A38-332F-AF30-C6EBC1F4B3F4}</Project>
+      <Name>tearing</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\threads.vcxproj">
+      <Project>{37E83555-4C7E-3276-9498-8F8715362242}</Project>
+      <Name>threads</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\timeout.vcxproj">
+      <Project>{D6843057-0295-358F-B3DF-95F48C0F421D}</Project>
+      <Name>timeout</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\title.vcxproj">
+      <Project>{3A77E4E3-A704-3120-B750-784E5E39635E}</Project>
+      <Name>title</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\trading_bot.vcxproj">
+      <Project>{6FC0F729-A720-3A67-82FE-8202EB72AF9C}</Project>
+      <Name>trading_bot</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\trading_bot_gui.vcxproj">
+      <Project>{2D26BC06-CD8E-3412-BB35-C9C49CBE6CE5}</Project>
+      <Name>trading_bot_gui</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\trading_core.vcxproj">
+      <Project>{39D669BA-C361-3046-AC9B-37A6BC12D0C1}</Project>
+      <Name>trading_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\triangle-vulkan.vcxproj">
+      <Project>{C6D2A52F-D406-3D22-AEF0-A4884719BEAE}</Project>
+      <Name>triangle-vulkan</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\examples\wave.vcxproj">
+      <Project>{5566F233-00C3-3EF7-89CF-A4A9FD412AB6}</Project>
+      <Name>wave</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-build\tests\windows.vcxproj">
+      <Project>{DEFE6126-423D-3CBB-9996-3702ED4F8884}</Project>
+      <Name>windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.9.targets" />
+  </ImportGroup>
+</Project>

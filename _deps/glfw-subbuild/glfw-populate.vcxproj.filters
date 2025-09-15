@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\f6c1c8a65f1f00b1e1b755f29fa142bd\glfw-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\89408c04d0240192aeac2a1c11e4b484\glfw-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\753004f893f77d847756276e2494961d\glfw-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\_deps\glfw-subbuild\CMakeFiles\glfw-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A965D3AA-D01F-3F6D-9F18-7B7CAF150ABB}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

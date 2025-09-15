@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="src\gpu_kernels.cu">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeFiles\gpu_kernels.dir\src\$(Configuration)\gpu_kernels_generated_gpu_kernels.cu.obj">
+      <Filter>Object Files</Filter>
+    </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object Files">
+      <UniqueIdentifier>{14EFD5FF-391E-3511-ADBF-071399BD742D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ABD813C3-FC8C-3CEA-92D5-9CF069BEE40D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

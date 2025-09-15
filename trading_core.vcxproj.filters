@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\Backtester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\DataLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\GeneticStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\GPUStrategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\MovingAverage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\Strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\genetic_evolution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\src\strategy_grid_search.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\koanr\Desktop\C++\Trading-Algorithm\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ABD813C3-FC8C-3CEA-92D5-9CF069BEE40D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

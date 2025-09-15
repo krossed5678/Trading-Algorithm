@@ -92,7 +92,6 @@ set(CORE_SOURCES
     src/GPUStrategy.cpp
     src/MovingAverage.cpp
     src/Strategy.cpp
-    src/gui_main.cpp
     src/main.cpp
     src/genetic_evolution.cpp
     src/strategy_grid_search.cpp

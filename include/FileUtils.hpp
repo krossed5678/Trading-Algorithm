@@ -12,7 +12,6 @@ namespace FileUtils {
             "../" + filename,                           // One level up
             "../../" + filename,                        // Two levels up (build/Release/ -> project root)
             "../../../" + filename,                     // Three levels up (just in case)
-            "data/" + filename,                         // data subdirectory
             "../data/" + filename,                      // data subdirectory one level up
             "../../data/" + filename,                   // data subdirectory two levels up
         };

@@ -1,0 +1,14 @@
+# Target labels
+ imgui-populate
+# Source files and their labels
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/imgui-populate
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/236534e532895d7167a0c8fcba005509/imgui-populate.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/1e55e48a345ae853eb65b6d5aabdeb66/imgui-populate-complete.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-build.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-configure.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-download.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-install.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-mkdir.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-patch.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-test.rule
+C:/Users/koanr/Desktop/C++/Trading-Algorithm/_deps/imgui-subbuild/CMakeFiles/33d6b1248f359f1aa33e7bf22ad99289/imgui-populate-update.rule
