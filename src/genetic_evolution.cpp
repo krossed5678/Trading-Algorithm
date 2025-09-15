@@ -130,6 +130,9 @@ int main() {
         "../../data/SPY_1m.csv",
         "../../../data/SPY_1m.csv"
     };
+    {
+        std::cout << "[INFO] Running in overnight mode" << std::endl;
+    }
 
     auto data = load_data(search_paths, data_path);
     if (data.empty()) return 1;
